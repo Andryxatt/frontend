@@ -1,0 +1,63 @@
+.header
+    padding: 0 1.5rem
+    display: flex
+    flex-direction: row
+    vertical-align: middle
+    align-items: center
+    background-color: #ccc
+    justify-content: space-evenly
+    height: 5em
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    transition: transform 0.3s ease-in-out
+    transform: translateY(0)
+    width: 100%
+    &.hidden
+        transform: translateY(-100%)
+    @media screen and (max-width: 920px)
+        justify-content: space-between
+        padding: 0 0.5rem
+    nav
+        display: flex
+        flex-direction: row
+        height: 100%
+        @media screen and (max-width: 920px)
+            display: none
+    ul
+        display: flex
+        flex-direction: row
+        align-items: center
+        @media screen and (max-width: 920px)
+            display: none
+        li
+            padding: 0 0.5rem
+            cursor: pointer
+  
+.icon
+    width: 1.5em
+    height: 1.5em
+.open
+    display: block
+    position: fixed
+    left: 0
+    top: 0
+    width: 260px
+    background-color: #ffc
+    height: 100vh
+.wrapper
+    display: none
+    button
+        margin-right: 1.5rem
+    @media screen and (max-width: 920px)
+        display: flex
+        flex-direction: row
+        align-items: center
+.mobile_menu
+    display: none
+   
+.logo
+    @media screen and (max-width: 920px)
+        justify-self: start
+        

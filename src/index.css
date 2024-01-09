@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+    box-sizing: border-box;
+}
+.openNavbar{
+    display: block;
+    background-size: 30px;
+    background-position: center;
+    width: 32px;
+    height: 32px;
+}
