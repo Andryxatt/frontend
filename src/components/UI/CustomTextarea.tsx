@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useFormContext } from "react-hook-form";
-export const CustomTextarea = ({label, type, id, placeholder, validation, value}:any) => {
+export const CustomTextarea = ({label, id, placeholder, validation, value}:any) => {
   const {
     register,
     formState: { errors },

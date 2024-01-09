@@ -1,9 +1,7 @@
-import { apiSlice, useGetCategoriesQuery, useNewSubCategoryMutation } from "../../api/apiSlice";
-import { useAppSelector } from "../../store/hooks";
-import store from "../../store/store";
+import {  useGetCategoriesQuery, useNewSubCategoryMutation } from "../../api/apiSlice";
 const SubCategoryNew = () => {
     const [newSubCategory] = useNewSubCategoryMutation();
-    const {data:categories,} = useGetCategoriesQuery(undefined, { refetchOnMountOrArgChange: true });
+    const {data:categories,} = useGetCategoriesQuery(undefined, { refetchOnMountOrArgChange: true }) as any;
     const createNewCategory = (e: any) => {
         e.preventDefault();
         const name = e.target.namecategory.value;

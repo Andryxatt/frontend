@@ -4,18 +4,14 @@ import DashboardLayout from "../../layouts/DashboardLayout";
 import { useParams } from "react-router";
 import { useGetBrandQuery } from "../../api/apiSlice";
 import { ToastContainer, toast } from "react-toastify";
-import { CustomInput } from "../UI/CustomInput";
+import CustomInput  from "../UI/CustomInput";
 import { FormProvider, useForm } from "react-hook-form";
 import { CustomTextarea } from "../UI/CustomTextarea";
-type BrandResponse = {
-    data: any,
-    isSuccess: boolean,
-}
 const BrandEdit = () => {
     const { id } = useParams<{ id: string }>();
     const methods = useForm()
     const [file, setFile] = useState(null) as any;
-    const { data: brand, isSuccess } = useGetBrandQuery<any>(id, { refetchOnMountOrArgChange: true });
+    const { data: brand, isSuccess } = useGetBrandQuery(id, { refetchOnMountOrArgChange: true }) as any;
     const [updateBrand] = useUpdateBrandMutation();
     const notifySuccess = () => toast("Brand updated!");
 

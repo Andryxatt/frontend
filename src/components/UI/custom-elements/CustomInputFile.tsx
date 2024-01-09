@@ -1,11 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useFormContext } from "react-hook-form";
-export const CustomInputFile = ({ label, type, id, placeholder, validation, onChangeEvent }: any) => {
+export const CustomInputFile = ({ label, type, id, placeholder, onChangeEvent }: any) => {
     const {
         register,
         formState: { errors },
     } = useFormContext()
-    const { onChange, onBlur, name, ref } = register('firstName');
+    const { onBlur, name, ref } = register('firstName');
     const inputError = findInputError(errors, id)
     const isInvalid = isFormInvalid(inputError)
     return (

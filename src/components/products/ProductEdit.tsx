@@ -5,7 +5,6 @@ import { useState, useMemo, useRef } from "react";
 import Select from "react-select";
 const ProductEdit = () => {
     const { id } = useParams<{ id: string }>();
-    console.log(id)
     const refQuantitySize = useRef<HTMLInputElement>(null)
     const refSelectedSize = useRef<any>(null)
     const refSelectCategory = useRef<any>(null)
@@ -20,28 +19,21 @@ const ProductEdit = () => {
     const { data: brands,
         isLoading: brandsIsLoading,
         isSuccess: brandsIsSuccess,
-        isError: brandsIsError,
-        error: brandError } = useGetBrandsQuery(id, { refetchOnMountOrArgChange: true });
-    const { data: categories,
-        isLoading: categoriesIsLoading,
-        isSuccess: categoriesIsSuccess,
-        isError: categoriesIsError,
-        error: categoryError } = useGetCategoriesQuery(id, { refetchOnMountOrArgChange: true });
+         } = useGetBrandsQuery(id, { refetchOnMountOrArgChange: true }) as any;
+    // Assuming 'id' is a variable that you're passing to the hook
+    const { data: categories, isLoading: categoriesIsLoading, isSuccess: categoriesIsSuccess } = useGetCategoriesQuery(id, { refetchOnMountOrArgChange: true }) as any;
     const { data: subCategories,
         isLoading: subCategoriesIsLoading,
         isSuccess: subCategoriesIsSuccess,
-        isError: subCategoriesIsError,
-        error: subCategoryError } = useGetSybCategoriesQuery(id, { refetchOnMountOrArgChange: true });
+       } = useGetSybCategoriesQuery(id, { refetchOnMountOrArgChange: true });
 
     const { data: sizes,
         isLoading: sizeIsLoading,
-        isSuccess: sizeIsSuccess,
-        isError: sizeIsError,
-        error: sizeError } = useGetSizesQuery(id, { refetchOnMountOrArgChange: true });
+         } = useGetSizesQuery(id, { refetchOnMountOrArgChange: true });
 
-    const [deleteProductImage, { isLoading: deleteProductImageIsLoading }] = useDeleteProductImageMutation();
-    const [updateSingleProduct, { isLoading: updateProductIsLoading }] = useUpdateProductMutation();
-    const [currentCat, setCurrentCategory] = useState<any>(categories?.[0].id)
+    const [deleteProductImage ] = useDeleteProductImageMutation();
+    const [updateSingleProduct] = useUpdateProductMutation();
+    const [currentCat, setCurrentCategory] = useState<any>(categories?.[0]?.id)
     const filteredSubCategories = useMemo(() => {
         const subs = subCategories?.filter((subCategory: any) => {
             return subCategory.category.id == currentCat

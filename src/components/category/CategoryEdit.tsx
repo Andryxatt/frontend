@@ -2,7 +2,7 @@ import DashboardLayout from "../../layouts/DashboardLayout";
 import { useParams } from "react-router";
 import { useGetCategoryQuery, useUpdateCategoryMutation } from "../../api/apiSlice";
 import { ToastContainer, toast } from "react-toastify";
-import { CustomInput } from "../UI/CustomInput";
+import  CustomInput  from "../UI/CustomInput";
 import { FormProvider, useForm } from "react-hook-form";
 import { CustomTextarea } from "../UI/CustomTextarea";
 const CategoryEdit = () => {

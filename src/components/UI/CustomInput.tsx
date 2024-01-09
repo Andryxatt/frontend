@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useFormContext } from "react-hook-form";
-export const CustomInput = ({label, type, id, placeholder, validation, value}:any) => {
+const CustomInput = ({label, type, id, placeholder, validation, value}:any) => {
   const {
     register,
     formState: { errors },
@@ -34,7 +34,7 @@ export const CustomInput = ({label, type, id, placeholder, validation, value}:an
     )
     
 }
-
+export default CustomInput;
 // eslint-disable-next-line no-empty-pattern
 type InputErrorProps = {
   message: string;

@@ -11,11 +11,9 @@ import menuIcon from "../../assets/icons/menu.png";
 import CustomModal from "../../components/UI/CustomModal";
 import { fetchProductSuccess } from "../../store/slices/product.slice";
 import './MainHeader.sass'
-type MainHeaderProps = {
-    isVisible: boolean;
-};
 const MainHeader: React.FC = () => {
     const [isVisible, setIsVisible] = useState<boolean>(true);
+    const urlApi = process.env.REACT_APP_API_URL;
 
     useEffect(() => {   
       const handleScroll = () => {
@@ -39,7 +37,7 @@ const MainHeader: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
     const getNewProducts = () => {
-        fetch('http://localhost:3000/products/newProducts')
+        fetch(urlApi + '/products/newProducts')
             .then((res) => res.json())
             .then((res) => {
                 dispatch(fetchProductSuccess(res))

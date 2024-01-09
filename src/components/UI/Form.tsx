@@ -1,5 +1,5 @@
 import { FormProvider, useForm } from "react-hook-form"
-import { Input } from "./CustomInput"
+import  Input  from "./CustomInput"
 
 export const Form = () => {
   const methods = useForm()

@@ -232,7 +232,7 @@ export const apiSlice = createApi({
     getProducts: builder.query({
       query: ({ page, limit, search }) => `/products?page=${page}&limit=${limit}&search=${search}`,
       providesTags: ['Products'],
-      async onQueryStarted(_args, { dispatch, queryFulfilled }) {
+      async onQueryStarted(_args, { queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
           console.log(data, 'data api');
@@ -249,6 +249,7 @@ export const apiSlice = createApi({
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
+          console.log(arg, 'args');
           dispatch(fetchProductSuccess(data));
         }
         catch (err) {

@@ -1,9 +1,9 @@
 import { Product } from "../../models/product.model";
 import SingleProduct from "./SingleProduct";
 import { useAppSelector } from "../../store/hooks";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchProducts } from "../../store/slices/product.slice";
+// import { fetchProducts } from "../../store/slices/product.slice";
 import { AppDispatch } from "../../store/store";
 import { loadMoreProduct, setActiveFilters } from "../../store/slices/blacklist.slice";
 import { useLocation } from "react-router-dom";
@@ -19,10 +19,10 @@ const Products = () => {
   const [gridSize, setGridSize] = useState(4);
   const columnClass = `grid grid-cols-${gridSize} gap-4 mt-4 mb-4`;
   const dispatch = useDispatch<AppDispatch>();
-  const fetchData = useCallback(async () => {
-    const params = { page: 1, limit: limit !== undefined ? limit : 10, search: "" };
-    await dispatch(fetchProducts(params));
-  }, [limit]);
+  // const fetchData = useCallback(async () => {
+  //   const params = { page: 1, limit: limit !== undefined ? limit : 10, search: "" };
+  //   await dispatch(fetchProducts(params));
+  // }, [limit]);
 
   // useEffect(() => {
   //   fetchData();

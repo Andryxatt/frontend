@@ -1,4 +1,4 @@
-const LoginHeader = (props: any) => {
+const LoginHeader = () => {
     return (
         <header >
             <h1>Log In</h1>

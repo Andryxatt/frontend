@@ -12,19 +12,19 @@ const ActiveBar = () => {
     const {
         isSuccess: isSuccessBrands,
         data: brands,
-    } = useGetBrandsQuery(undefined, { refetchOnMountOrArgChange: true });
+    } = useGetBrandsQuery(undefined, { refetchOnMountOrArgChange: true }) as any
     const {
         isSuccess: isSuccessCategories,
         data: categories,
-    } = useGetCategoriesQuery(undefined, { refetchOnMountOrArgChange: true });
+    } = useGetCategoriesQuery(undefined, { refetchOnMountOrArgChange: true }) as any;
     const isActiveFilter = useAppSelector((state) => state.blackListSlice.isActive);
 
     const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, checked } = event.target;
         console.log(name, checked);
     };
-    const checkboxesBrands = isSuccessBrands && brands?.map((item: IBrand, index: number) => (
-        <div  key={item.name}   >
+    const checkboxesBrands = isSuccessBrands && brands?.map((item: IBrand) => (
+        <div  key={item.name}>
             <label>
                 <input
                     type="checkbox"

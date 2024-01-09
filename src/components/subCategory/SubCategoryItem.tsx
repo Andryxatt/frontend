@@ -7,7 +7,7 @@ const SubCategoryItem = (subCategory:any) => {
     const [isEdit, setIsEdit] = useState(false);
     const [updateCategory] = useUpdateSubCategoryMutation();
     const [deleteCategory] = useDeleteSubCategoryMutation();
-    const {data:categories,} = useGetCategoriesQuery(undefined, { refetchOnMountOrArgChange: true });
+    const {data:categories,} = useGetCategoriesQuery(undefined, { refetchOnMountOrArgChange: true }) as any;
     const changeToEdit = () => {
         setIsEdit(!isEdit);
     }

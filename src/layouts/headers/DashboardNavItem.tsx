@@ -10,14 +10,11 @@ type DashboardNavItemProps = {
 const DashboardNavItem = ({ to, text, isOpenMenu, IconItem }: DashboardNavItemProps) => {
     const location = useLocation();
     const [isFocused, setIsFocused] = useState<boolean>(false);
-    const [focusedClass, setFocusedClass] = useState<string>("");
     const onFucusIn = () => {
         setIsFocused(true)
-        setFocusedClass("bg-blue-300 text-black fixed text-black p-4 rounded-md ")
     }
     const onFucusOut = () => {
         setIsFocused(false)
-        setFocusedClass("")
     }
     return (
         <NavLink

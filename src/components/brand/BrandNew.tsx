@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useAddNewBrandMutation } from "../../api/apiSlice";
 import { FormProvider, useForm } from "react-hook-form";
-import { CustomInput } from "../UI/CustomInput";
+import  CustomInput  from "../UI/CustomInput";
 import { CustomTextarea } from "../UI/CustomTextarea";
 import { toast } from "react-toastify";
 import { CustomInputFile } from "../UI/custom-elements/CustomInputFile";
@@ -22,7 +22,7 @@ const BrandNew = () => {
         setImgPreview(URL.createObjectURL(fileChangeEvent.target.files[0]))
     }
     const onSubmit = methods.handleSubmit((data: any) => {
-        const { name, description, file } = data
+        const { name, description } = data
         const formData = new FormData();
         formData.append('name', name);
         formData.append('description', description);

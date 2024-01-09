@@ -1,29 +1,28 @@
-import { useState } from "react";
-import { useDeleteProductMutation, useUpdateProductMutation } from "../../api/apiSlice";
+import { useDeleteProductMutation } from "../../api/apiSlice";
 import { Link } from "react-router-dom";
 const ProductItem = ({ product }: { product: any }) => {
-    const onFileChange = (fileChangeEvent: any) => {
-        setFile(fileChangeEvent.target.files[0]);
-    }
+    // const onFileChange = (fileChangeEvent: any) => {
+    //     setFile(fileChangeEvent.target.files[0]);
+    // }
    
-    const [file, setFile] = useState(null) as any;
-    const [name, setName] = useState(product.name);
-    const [updateProduct] = useUpdateProductMutation();
+    // const [file, setFile] = useState(null) as any;
+    // const [name, setName] = useState(product.name);
+    // const [updateProduct] = useUpdateProductMutation();
     const [deleteProduct] = useDeleteProductMutation();
-    const [isEdit, setIsEdit] = useState(false);
-    const update = async (product: any) => {
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('name', product.name);
-        formData.append('id', product.id);
-        if (file !== null) {
-            formData.append('file', file, file.name);
-            await updateProduct({ id: product.id, formData }).unwrap()
-        }
-        else {
-            await updateProduct({ id: product.id, formData }).unwrap()
-        }
-    }
+    // const [isEdit, setIsEdit] = useState(false);
+    // const update = async (product: any) => {
+    //     const formData = new FormData();
+    //     formData.append('name', name);
+    //     formData.append('name', product.name);
+    //     formData.append('id', product.id);
+    //     if (file !== null) {
+    //         formData.append('file', file, file.name);
+    //         await updateProduct({ id: product.id, formData }).unwrap()
+    //     }
+    //     else {
+    //         await updateProduct({ id: product.id, formData }).unwrap()
+    //     }
+    // }
     return (
         <div className="my-[2em] p-3 bg-gray-200 flex flex-row justify-between items-center">
             <div>{product.id}</div>

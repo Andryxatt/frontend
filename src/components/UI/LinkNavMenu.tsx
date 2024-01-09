@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC} from 'react';
 import { Link } from "react-router-dom";
 import styles from './LinkNavMenu.module.sass';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -8,16 +8,10 @@ export interface LinkProps {
     popUpChildren: React.ReactElement;
 }
 
-const LinkNavMenu: FC<LinkProps> = ({ to, children, popUpChildren }: LinkProps) => {
-    const [show, setShow] = useState(false);
-    const showBlock = () => {
-        setShow(true);
-    }
-    const hideBlock = () => {
-        setShow(false);
-    }
+const LinkNavMenu: FC<LinkProps> = ({ to, children }: LinkProps) => {
+    
     return (
-        <div onMouseLeave={hideBlock} onMouseOver={showBlock} className={styles.wrappLink}>
+        <div className={styles.wrappLink}>
             <Link to={to}>{children}</Link>
             {/* <Link  className={show ? styles.navMenuItem : ""} to={to}>{children}</Link> */}
             {/* <div className={show ? styles.popUp : styles.hiddenPopUp}>{popUpChildren}</div> */}

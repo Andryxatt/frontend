@@ -4,14 +4,7 @@ import DashboardLayout from "../../layouts/DashboardLayout";
 import { useGetBrandsQuery } from '../../api/apiSlice'
 import { Brand } from "../../models/brand.model";
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-type BrandsApiResponse = {
-  data: Brand[],
-  isLoading: boolean,
-  isSuccess: boolean,
-  isError: boolean,
-  error: string | null
-}
+
 const BrandList = () => {
 
   const [showBrandNew, setShowBrandNew] = useState(false)
@@ -20,12 +13,12 @@ const BrandList = () => {
     isLoading,
     isSuccess,
     isError,
-    error } = useGetBrandsQuery<BrandsApiResponse>(undefined, { refetchOnMountOrArgChange: true });
+    error } = useGetBrandsQuery(undefined, { refetchOnMountOrArgChange: true }) as any;
   let content
   if (isLoading) {
     content = <></>
   } else if (isSuccess) {
-    content = brands.map((brand: Brand) => <BrandItem key={brand.id} brand={brand} />)
+    content = brands?.map((brand: Brand) => <BrandItem key={brand.id} brand={brand} />)
   } else if (isError) {
     content = <div>{error?.toString()}</div>
   }

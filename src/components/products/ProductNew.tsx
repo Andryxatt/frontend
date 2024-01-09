@@ -17,7 +17,7 @@ import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill } from 'react-icons/
 import { IconContext } from 'react-icons';
 import styles from './ProductNew.module.sass'
 import Select from 'react-select';
-import { CustomInput } from '../UI/CustomInput';
+import  CustomInput from '../UI/CustomInput';
 import {  FormProvider, useForm } from 'react-hook-form';
 import { CustomSelect } from '../UI/CustomSelect';
 import { CustomTextarea } from '../UI/CustomTextarea';
@@ -29,22 +29,7 @@ const statuses = [
     { name: "Відсутній" },
     { name: "Відновлено" }
 ]
-type Inputs = {
-    name: string,
-    model: string,
-    brandId: string,
-    price: number,
-    curencyPrice: number,
-    discount: number,
-    gender: number,
-    seasone: number,
-    colores: number[],
-    features: number[],
-    description: string,
-    subCategories: string[],
-    sizes: string[],
-    images: any[]
-};
+
 type SelectOption ={
     label:string,
     value:string
@@ -59,47 +44,41 @@ type SelectFeatureOption ={
 }
 const ProductNew = () => {
     const methods = useForm()
-    const [validSize, setValidSize] = useState<boolean>(true)
-    const [validSizeQuantity, setValidSizeQuantity] = useState<boolean>(true)
+    // const [validSize, setValidSize] = useState<boolean>(true)
+    // const [validSizeQuantity, setValidSizeQuantity] = useState<boolean>(true)
     const [isSizesOpen, setIsSizesOpen] = useState<boolean>(true)
     const [isFeatureOpen, setIsFeaturesOpen] = useState<boolean>(true)
-    const refSelectCategory = useRef<any>(null)
     const refQuantitySize = useRef<any>(null)
     const refFeatureDescription = useRef<any>(null)
     const refFeature = useRef<any>(null)
     const refSelectedSize = useRef<any>(null)
-    const refInputFiles = useRef<any>(null)
     const subCategoriesRef = useRef<any>(null)
     const [addNewProduct] = useNewProductMutation()
     const { data: brands,
         isLoading: isLoadingBrands,
-        isSuccess: isSuccessBrands,
-    } = useGetBrandsQuery(null, { refetchOnMountOrArgChange: true })
+    } = useGetBrandsQuery(null, { refetchOnMountOrArgChange: true }) as any
     const { data: genders,
         isLoading: isLoadingGenders,
-        isSuccess: isSuccessGenders,
-    } = useGetGenderQuery(null, { refetchOnMountOrArgChange: true })
+    } = useGetGenderQuery(null, { refetchOnMountOrArgChange: true }) as any
     const { data: seasones,
         isLoading: isLoadingSeasones,
-        isSuccess: isSuccessSeasones,
-    } = useGetSeasonesQuery(null, { refetchOnMountOrArgChange: true })
+    } = useGetSeasonesQuery(null, { refetchOnMountOrArgChange: true }) as any
     const { data: features,
         isLoading: isLoadingFeatures,
-        isSuccess: isSuccessFeatures,
-    } = useGetFeaturesQuery(null, { refetchOnMountOrArgChange: true })
+    } = useGetFeaturesQuery(null, { refetchOnMountOrArgChange: true }) as any
     const { data: discounts,
         isLoading: isLoadingDiscounts,
-    } = useGetDiscountsQuery(null, { refetchOnMountOrArgChange: true })
-    const { data: categories, isLoading: isLoadingCategories } = useGetCategoriesQuery(undefined, { refetchOnMountOrArgChange: true })
+    } = useGetDiscountsQuery(null, { refetchOnMountOrArgChange: true }) as any
+    const { data: categories, isLoading: isLoadingCategories } = useGetCategoriesQuery(undefined, { refetchOnMountOrArgChange: true }) as any
     const { data: sizes, isLoading: sizeIsLoading,
-    } = useGetSizesQuery(undefined, { refetchOnMountOrArgChange: true })
+    } = useGetSizesQuery(undefined, { refetchOnMountOrArgChange: true }) as any
     const { data: subCategories,
         isLoading: isLoadingSubCategories,
-    } = useGetSybCategoriesQuery(undefined, { refetchOnMountOrArgChange: true })
+    } = useGetSybCategoriesQuery(undefined, { refetchOnMountOrArgChange: true }) as any
     const {
         data: colores,
         isLoading: isLoadingColores,
-    } = useGetColoresQuery(undefined, { refetchOnMountOrArgChange: true })
+    } = useGetColoresQuery(undefined, { refetchOnMountOrArgChange: true }) as any
     const [images, setImages] = useState<any>()
     const [sizesProduct, setSizesProduct] = useState<any>([])
     const [featuresProduct, setFeaturesProduct] = useState<any>([])
@@ -174,8 +153,6 @@ const ProductNew = () => {
     }
     const addSize = () => {
         if (refSelectedSize.current.state.selectValue.length === 0 || refQuantitySize.current.value === "") {
-            setValidSize(true)
-            setValidSizeQuantity(true)
             return
         }
         if (sizesProduct.find((size: any) => size.sizeId === refSelectedSize.current.state.selectValue[0].value)) {

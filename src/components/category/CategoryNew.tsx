@@ -1,7 +1,7 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useNewCategoryMutation } from "../../api/apiSlice";
-import { CustomInput } from "../UI/CustomInput";
+import  CustomInput  from "../UI/CustomInput";
 import { CustomTextarea } from "../UI/CustomTextarea";
 const CategoryNew = () => {
     const methods = useForm()
