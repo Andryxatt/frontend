@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "private": true,
+  "homepage": "https://step-in-style.shop",
   "version": "0.1.0",
   "type": "module",
   "scripts": {
