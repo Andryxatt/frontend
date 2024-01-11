@@ -28,7 +28,7 @@ const ActiveBar = () => {
             <label>
                 <input
                     type="checkbox"
-                    name={item.id.toString()} // Use a unique identifier as the name
+                    name={item.name} // Use a unique identifier as the name
                     onChange={handleCheckboxChange}
                 />
                 {item.name}
