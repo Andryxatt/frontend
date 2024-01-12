@@ -20,7 +20,7 @@ const BrandList = () => {
   } else if (isSuccess) {
     content = brands?.map((brand: Brand) => <BrandItem key={brand.id} brand={brand} />)
   } else if (isError) {
-    content = <div>{error?.toString()}</div>
+    content = <><tr><td>Немає данних</td></tr></>
   }
   return (
     <DashboardLayout>

@@ -52,7 +52,7 @@ const ProductItem = ({ product }: { product: any }) => {
             <div>
                 {
                    
-                 <img className="w-[50px]" src={`${import.meta.env.VITE_LOCALHOST_URL}${product?.images[0]?.imagePath}`}/>
+                 <img className="w-[50px]" src={`${import.meta.env.VITE_API_URL}${product?.images[0]?.imagePath}`}/>
                 
                 }
             </div>

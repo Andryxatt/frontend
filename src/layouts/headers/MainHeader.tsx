@@ -13,7 +13,7 @@ import { fetchProductSuccess } from "../../store/slices/product.slice";
 import './MainHeader.sass'
 const MainHeader: React.FC = () => {
     const [isVisible, setIsVisible] = useState<boolean>(true);
-    const urlApi = process.env.REACT_APP_API_URL;
+    const urlApi = import.meta.env.REACT_APP_API_URL;
 
     useEffect(() => {   
       const handleScroll = () => {

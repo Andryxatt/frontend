@@ -4,18 +4,13 @@ import type { RootState } from './../store/store'
 import { fetchProductSuccess } from '../store/slices/product.slice'
 import { brandsApi } from './brands.api'
 import { categoriesApi } from './categories.api'
-// Define our single API slice object
 export const apiSlice = createApi({
-  // The cache reducer expects to be added at `state.api` (already default - this is optional)
   reducerPath: 'api',
-  // All of our requests will have URLs starting with '/fakeApi'
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_LOCALHOST_URL as string,
+    baseUrl: import.meta.env.VITE_API_URL as string,
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).userSlice.token
       headers.set('content-type', 'application/json')
-      //access  CORS 
-      headers.set('Access-Control-Allow-Origin', 'http://localhost:3000')
       // If we have a token set in state, let's assume that we should be passing it.
       if (token) {
         headers.set('authorization', `Bearer ${token}`)
