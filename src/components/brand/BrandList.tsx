@@ -12,8 +12,8 @@ const BrandList = () => {
     data: brands,
     isLoading,
     isSuccess,
-    isError,
-    error } = useGetBrandsQuery(undefined, { refetchOnMountOrArgChange: true }) as any;
+    isError
+  } = useGetBrandsQuery(undefined, { refetchOnMountOrArgChange: true }) as any;
   let content
   if (isLoading) {
     content = <></>
@@ -40,7 +40,7 @@ const BrandList = () => {
           {content}
         </tbody>
       </table>
-   
+
     </DashboardLayout>
   )
 }
