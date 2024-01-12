@@ -2,7 +2,7 @@ const MainFooter = () => {
     return (
         <>
             <footer>
-              Футер 1
+              Футер 2
             </footer>
         </>
     )
