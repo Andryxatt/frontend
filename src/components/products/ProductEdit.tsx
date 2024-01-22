@@ -229,7 +229,7 @@ const ProductEdit = () => {
                         {
                             product.images.map((image: any) => {
                                 return <div key={image.id}>
-                                    <img className="w-[150px]" src={`http://localhost:3000/products/${image?.imagePath}`} />
+                                    <img className="w-[150px]" src={`${import.meta.env.VITE_API_URL}${image?.imagePath}`} />
                                     <button type="button" onClick={() => deleteProductImage(image.id).unwrap()}>Видалити</button>
                                 </div>
                             })

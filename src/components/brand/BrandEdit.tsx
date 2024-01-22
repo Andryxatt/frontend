@@ -82,8 +82,8 @@ const BrandEdit = () => {
                         <div>
                             <input onChange={onFileChange} className="edit-input" type="file" />
                         </div>
-                        <img src={`${import.meta.env.VITE_LOCALHOST_URL}${brand?.iconPath}`} alt={brand?.name} />
-                        <button className="bg-blue-200 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded mr-2" onClick={onSubmit}>Оновити</button>
+                        <img src={`${import.meta.env.VITE_API_URL}${brand?.iconPath}`} alt={brand?.name} />
+                        <button className="bg-blue-400 hover:bg-blue-200 mr-2 text-white font-bold py-2 px-4 rounded" onClick={onSubmit}>Оновити</button>
                     </form>
                 }
             </FormProvider>

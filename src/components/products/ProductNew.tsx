@@ -17,8 +17,8 @@ import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill } from 'react-icons/
 import { IconContext } from 'react-icons';
 import styles from './ProductNew.module.sass'
 import Select from 'react-select';
-import  CustomInput from '../UI/CustomInput';
-import {  FormProvider, useForm } from 'react-hook-form';
+import CustomInput from '../UI/CustomInput';
+import { FormProvider, useForm } from 'react-hook-form';
 import { CustomSelect } from '../UI/CustomSelect';
 import { CustomTextarea } from '../UI/CustomTextarea';
 const statuses = [
@@ -30,17 +30,17 @@ const statuses = [
     { name: "Відновлено" }
 ]
 
-type SelectOption ={
-    label:string,
-    value:string
+type SelectOption = {
+    label: string,
+    value: string
 }
-type SelectSizeOption ={
-    sizeId:string,
-    quantity:number,
+type SelectSizeOption = {
+    sizeId: string,
+    quantity: number,
 }
-type SelectFeatureOption ={
-    featureId:string,
-    description:string,
+type SelectFeatureOption = {
+    featureId: string,
+    description: string,
 }
 const ProductNew = () => {
     const methods = useForm()
@@ -88,7 +88,7 @@ const ProductNew = () => {
     }
     const onSubmit = methods.handleSubmit(data => {
         console.log(data)
-        const {name, model, brandId, price, curencyPrice, discountId, description, gender, seasone, status, colores, subCategories} = data
+        const { name, model, brandId, price, curencyPrice, discountId, description, gender, seasone, status, colores, subCategories } = data
         const formData = new FormData();
         formData.append('name', name);
         formData.append('model', model);
@@ -144,11 +144,12 @@ const ProductNew = () => {
         return subs;
     }, [currentCat])
     const changeCategory = (e: any) => {
-      if(subCategoriesRef.current.state.selectValue.length !== 0){
-        //clear ref
-        subCategoriesRef.current.clearValue()
-      }
-      setCurrentCategory(e.value)
+        console.log(e)
+        if (subCategoriesRef.current.state.selectValue.length !== 0) {
+            //clear ref
+            subCategoriesRef.current.clearValue()
+        }
+        setCurrentCategory(e.value)
 
     }
     const addSize = () => {
@@ -203,7 +204,7 @@ const ProductNew = () => {
         setFeaturesProduct(newFeatures)
 
     }
-  
+
     return (
         <FormProvider {...methods}>
             <form
@@ -245,7 +246,7 @@ const ProductNew = () => {
                         }
                     }}
                 />
-                
+
                 {isLoadingBrands ? null : <CustomSelect placeholder="Бренд" label="Бренд" id="brandId" options={brands?.map((value: any) => ({
                     label: value.name,
                     value: value.id,
@@ -261,9 +262,9 @@ const ProductNew = () => {
                     id="price"
                     placeholder="Ціна закупки 0.0"
                     validation={{
-                        required:{
-                            value:true,
-                            message:'Обовязкове поле'
+                        required: {
+                            value: true,
+                            message: 'Обовязкове поле'
                         },
                         pattern: {
                             value: /^\d+(\.\d{1,2})?$/,
@@ -271,16 +272,16 @@ const ProductNew = () => {
                         }
                     }}
                 />
-            
+
                 <CustomInput
                     label="Курс при закупці"
                     type="text"
                     id="curencyPrice"
                     placeholder="Курс при закупці 0.0"
                     validation={{
-                        required:{
-                            value:true,
-                            message:'Обовязкове поле'
+                        required: {
+                            value: true,
+                            message: 'Обовязкове поле'
                         },
                         pattern: {
                             value: /^\d+(\.\d{1,2})?$/,
@@ -288,7 +289,7 @@ const ProductNew = () => {
                         }
                     }}
                 />
-              
+
                 {isLoadingDiscounts ? null : <CustomSelect placeholder="Знижка" label="Знижка" id="discountId" options={discounts?.map((value: any) => ({
                     label: value.percentage,
                     value: value.id,
@@ -298,26 +299,26 @@ const ProductNew = () => {
                     label: value.name,
                     value: value.id,
                 }))} isLoading={isLoadingGenders} control={methods.control} />}
-             
-                {isLoadingSeasones ? null : <CustomSelect  placeholder="Сезон" label="Сезон" id="seasone" options={seasones?.map((value: any) => ({
+
+                {isLoadingSeasones ? null : <CustomSelect placeholder="Сезон" label="Сезон" id="seasone" options={seasones?.map((value: any) => ({
                     label: value.name,
                     value: value.id,
                 }))} isLoading={isLoadingSeasones} control={methods.control} />}
-              
-                     {isLoadingCategories ? null : <CustomSelect onChangeValue={changeCategory} placeholder="Категорія" label="Категорія" id="category" options={categories?.map((value: any) => ({
+
+                {isLoadingCategories ? null : <CustomSelect onChangeValue={changeCategory} placeholder="Категорія" label="Категорія" id="category" options={categories?.map((value: any) => ({
                     label: value.name,
                     value: value.id,
                 }))} isLoading={isLoadingCategories} control={methods.control} />}
 
-                 {isLoadingSubCategories ? null : <CustomSelect refSelect={subCategoriesRef} onChange={null} isMulti={true} placeholder="Під категорія" label="Підкатегорія" id="subCategories" options={filteredSubCategories?.map((value: any) => ({
+                {isLoadingSubCategories ? null : <CustomSelect refSelect={subCategoriesRef} onChange={null} isMulti={true} placeholder="Під категорія" label="Підкатегорія" id="subCategories" options={filteredSubCategories?.map((value: any) => ({
                     label: value.name,
                     value: value.id,
                 }))} isLoading={isLoadingSubCategories} control={methods.control} />}
-        <CustomSelect placeholder="Статус" label="Статус" id="status" options={statuses.map((value: any) => ({
+                <CustomSelect placeholder="Статус" label="Статус" id="status" options={statuses.map((value: any) => ({
                     label: value.name,
                     value: value.name,
-        }))} isLoading={false} control={methods.control} />
-                     <CustomTextarea label="Опис" id="description" placeholder="Опис" validation={{
+                }))} isLoading={false} control={methods.control} />
+                <CustomTextarea label="Опис" id="description" placeholder="Опис" validation={{
                     required: {
                         value: true,
                         message: 'Обовязкове поле'

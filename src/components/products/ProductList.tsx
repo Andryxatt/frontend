@@ -6,8 +6,8 @@ import ProductItem from "./ProductItem";
 import ProductNew from "./ProductNew";
 import React from "react";
 const ProductList = () => {
-  const [page, ] = useState(1);
-  const [search, ] = useState('r');
+  const [page,] = useState(1);
+  const [search,] = useState('');
   const [limit, setLimit] = useState(1);
   const loadButtonRef = React.useRef<HTMLButtonElement>(null)
   const {
@@ -15,22 +15,22 @@ const ProductList = () => {
     isLoading,
     isSuccess,
     isError,
-    error} = useGetProductsQuery({ page, limit, search });
-    React.useEffect(() => {
-      if (!isLoading) {
-        // Focus the button after data is loaded
-        if (loadButtonRef.current) {
-          loadButtonRef.current.focus();
-        }
+    error } = useGetProductsQuery({ page, limit, search });
+  React.useEffect(() => {
+    if (!isLoading) {
+      // Focus the button after data is loaded
+      if (loadButtonRef.current) {
+        loadButtonRef.current.focus();
       }
-    }, [isLoading]);
+    }
+  }, [isLoading]);
   let content
   if (isLoading) {
     content = <></>
   } else if (isSuccess) {
-    content = data?.products.map((product: Product) =>{
-      return <ProductItem key={product.id} product={product} />
-    } )
+    content = data.products?.map((product: Product) =>
+      <ProductItem key={product.id} product={product} />
+    )
   } else if (isError) {
     content = <div>{error.toString()}</div>
   }
@@ -51,16 +51,22 @@ const ProductList = () => {
           </div>
           {content}
         </div>
-        <button ref={loadButtonRef} disabled={isLoading} className="bg-green-400 w-[220px] self-center mt-4 p-4 rounded-lg" onClick={()=>{setLimit(limit + 10)}}>
-        {isLoading ? (
-          // Show a loading spinner when the data is loading
-          <div className="spinner">
-            Loading...
-          </div>
-        ) : (
-          // Show "Load More" text when not loading
-          'Завантажити ще'
-        )}
+        <button
+          ref={loadButtonRef}
+          disabled={isLoading || data.total <= data.products?.length}
+          className={`w-[220px] self-center mt-4 p-4 rounded-lg ${isLoading || data.total <= data.products?.length ? "bg-gray-400" : "bg-green-400"
+            }`}
+          onClick={() => { setLimit((cur) => data.total > data.products?.length ? cur += 10 : cur) }}
+        >
+          {isLoading ? (
+            // Show a loading spinner when the data is loading
+            <div className="spinner">
+              Loading...
+            </div>
+          ) : (
+            // Show "Load More" text when not loading
+            'Завантажити ще'
+          )}
         </button>
       </div>
     </DashboardLayout>

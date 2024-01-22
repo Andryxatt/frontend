@@ -6,6 +6,7 @@ type MainLayoutProps = {
   children: ReactNode;
 };
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+// 
     return (
         <div className="h-[100%]">
             <MainHeader />

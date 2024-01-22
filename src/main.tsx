@@ -36,7 +36,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard/brands" element={<BrandList />} />
-          <Route path="/dashboard/brands/:id" Component={BrandEdit} />
+          <Route path="/dashboard/brands/:id" element={<BrandEdit />} />
           <Route path="/dashboard/categories/:id" element={<CategoryEdit />} />
           <Route path="/dashboard/categories" element={<CategoryList />} />
           <Route path="/dashboard/sub-categories" element={<SubCategoryList />} />
@@ -49,9 +49,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <Route path="/dashboard/products" element={<ProductList />} />
           <Route path="/products" element={<Products />} />
           <Route path="*" element={<h1>Not Found</h1>} />
-          <Route path="/products/:id" Component={ProductDetails} />
-          <Route path="/dashboard/products/:id" Component={ProductEdit} />
-          <Route path="/acount" Component={AccountInformation} />
+          <Route path="/products/:id" element={<ProductDetails/>} />
+          <Route path="/dashboard/products/:id" element={<ProductEdit/>} />
+          <Route path="/acount" element={<AccountInformation/>} />
         </Routes>
       </BrowserRouter>
     </PersistGate>

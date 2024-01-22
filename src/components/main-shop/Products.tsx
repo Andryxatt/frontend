@@ -1,9 +1,9 @@
 import { Product } from "../../models/product.model";
 import SingleProduct from "./SingleProduct";
 import { useAppSelector } from "../../store/hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-// import { fetchProducts } from "../../store/slices/product.slice";
+import { fetchProducts } from "../../store/slices/product.slice";
 import { AppDispatch } from "../../store/store";
 import { loadMoreProduct, setActiveFilters } from "../../store/slices/blacklist.slice";
 import { useLocation } from "react-router-dom";
@@ -24,10 +24,11 @@ const Products = () => {
   //   await dispatch(fetchProducts(params));
   // }, [limit]);
 
-  // useEffect(() => {
-  //   fetchData();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [limit]);
+  useEffect(() => {
+   const products = fetchProducts({ page: 1, limit: 10, search: ""});
+  dispatch(products);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [limit]);
   const loadMore = () => {
     dispatch(loadMoreProduct(limit + 10));
   }
@@ -37,7 +38,7 @@ const Products = () => {
   
   return (
     <MainLayout>
-      <p>Головна {location.pathname} </p>
+      <p>Головна {location.pathname}</p>
       <hr className="mt-4" />
       <div className="flex flex-row justify-between items-center">
         <span> {total} Товарів </span>

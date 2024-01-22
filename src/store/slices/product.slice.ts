@@ -18,9 +18,10 @@ const initialState: ProductPagination = {
 //create thunk to load products from api
 export const fetchProducts = createAsyncThunk<ProductPagination, any>(
   'products/fetchProducts',
-  async (arg: any, thunkAPI) => {
+  async (args: any, thunkAPI) => {
     try {
-      const response = await ProductDataService.getProducts(arg.page, arg.limit, arg.search);
+      const response = await ProductDataService.getProducts(args.page, args.limit, args.search);
+      console.log(response, 'response');
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -47,6 +48,7 @@ export const productSlice = createSlice({
       state.error = action.payload;
     },
     selectProduct(state, action: PayloadAction<number>) {
+      console.log(action.payload, 'action.payload');
       // Find the product with the given id from state.products
       const selectedProduct = state.products.find((product) => product.id === action.payload);
 

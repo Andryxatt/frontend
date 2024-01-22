@@ -7,17 +7,16 @@ const CategoryNew = () => {
     const methods = useForm()
     const [addNewCategory] = useNewCategoryMutation()
     const notifySuccess = () => toast("Категорія додана!")
-  
+    const notifyError = () => toast.error("Помилка при додаванні категорії!")
     const onSubmit = methods.handleSubmit((data: any) => {
         const { name, description } = data
-
         try {
             addNewCategory({name, description}).unwrap()
-            notifySuccess();
+            notifySuccess()
         } catch (error) {
+            notifyError()
             console.log(error);
         }
-
     })
     return (
         <div>
@@ -57,7 +56,7 @@ const CategoryNew = () => {
                         }} />
                     </div>
                     <div className="self-end">
-                        <button className="rounded-md bg-green-400 px-2 py-1" onClick={onSubmit}>Створити</button>
+                        <button className="bg-green-400 hover:bg-green-200 text-white font-bold py-2 px-4 rounded" onClick={onSubmit}>Створити</button>
                     </div>
                 </form>
             </FormProvider>

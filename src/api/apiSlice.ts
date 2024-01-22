@@ -10,9 +10,9 @@ export const apiSlice = createApi({
     baseUrl: import.meta.env.VITE_API_URL as string,
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).userSlice.token
-      headers.set('content-type', 'application/json')
-      // If we have a token set in state, let's assume that we should be passing it.
+      headers.append('Access-Control-Allow-Origin', '*')      // If we have a token set in state, let's assume that we should be passing it.
       if (token) {
+        console.log(token, 'token');
         headers.set('authorization', `Bearer ${token}`)
       }
       return headers

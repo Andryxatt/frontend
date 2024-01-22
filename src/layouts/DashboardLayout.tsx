@@ -1,16 +1,18 @@
-import { ReactNode, useMemo } from "react";
+import React, { ReactNode } from "react";
 import DashboardNavigation from "./headers/DashboardNavigation";
 import { ToastContainer } from "react-toastify";
+
 type DashboardLayoutProps = {
     children: ReactNode;
 };
+
+// eslint-disable-next-line react-refresh/only-export-components
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
-    const memoizedChildren = useMemo(() => children, [children]);
     return (
         <div className="flex flex-row">
             <DashboardNavigation />
             <div className="p-5 w-full">
-                {memoizedChildren}
+                {children}
             </div>
             <ToastContainer
                 position="top-right"

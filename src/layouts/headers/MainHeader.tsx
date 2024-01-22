@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import LinkNavMenu from "../../components/UI/LinkNavMenu";
 import searchIcon from '../../assets/icons/search.png';
 import phoneIcon from '../../assets/icons/phone-call.png';
@@ -80,8 +80,15 @@ const MainHeader: React.FC = () => {
                 <CartIcon />
             </div>
             <div className={`${isOpen ? "open" : "mobile_menu"} `}>
-                <h2>Menu Mobile</h2>
+                <h2>Мобіла</h2>
+                <NavLink to="/"><p className="text-black" onClick={getNewProducts}>Новинки</p></NavLink>
+                {
+                    user?.roles?.filter((role: string) => {
+                        return role === 'user'
+                    })[0] === 'user' && <NavLink to="/dashboard"><p>Dash</p></NavLink>
+                }
                 <button onClick={() => setIsOpen(false)}>Close menu</button>
+                
             </div>
         </header>
     );
