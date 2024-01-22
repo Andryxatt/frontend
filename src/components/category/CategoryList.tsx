@@ -18,8 +18,7 @@ const CategoryList = () => {
     data: categories,
     isLoading,
     isSuccess,
-    isError,
-    error } = useGetCategoriesQuery<CategoriesApiResponse>(undefined, { refetchOnMountOrArgChange: true });
+    isError } = useGetCategoriesQuery<CategoriesApiResponse>(undefined, { refetchOnMountOrArgChange: true });
   let content
 
   if (isLoading) {

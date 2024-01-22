@@ -7,14 +7,7 @@ type DashboardNavItemProps = {
     IconItem: IconType;
 }
 const DashboardNavItem = ({ to, text, IconItem }: DashboardNavItemProps) => {
-    const location = useLocation();
-    const [isFocused, setIsFocused] = useState<boolean>(false);
-    const onFucusIn = () => {
-        setIsFocused(true)
-    }
-    const onFucusOut = () => {
-        setIsFocused(false)
-    }
+
     return (
         <NavLink
             to={to}>
