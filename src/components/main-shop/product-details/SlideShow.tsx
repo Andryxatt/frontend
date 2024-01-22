@@ -40,14 +40,14 @@ const SlideShow = ({ images }: any) => {
     return (
         <div className="flex flex-row">
             <div className="flex flex-col mr-4">
-                {images.map((image: any, index: number) => (
+                {images?.map((image: any, index: number) => (
                     <div className={`${currentImageIndex === index ? " border-black" : "border-b-[3px] border-transparent"} w-full mb-2 border-b-[3px]`} key={index}>
-                        <img onMouseOver={() => changeImage(image, index)} className="w-[5em]" src={`${import.meta.env.VITE_LOCALHOST_URL}${image.imagePath}`} alt="Sunset in the mountains" />
+                        <img onMouseOver={() => changeImage(image, index)} className="w-[5em]" src={`${import.meta.env.VITE_API_URL}${image.imagePath}`} alt="Sunset in the mountains" />
                     </div>
                 ))}
             </div>
             <div className="relative">
-                <img className={`${style.imgAnimation} w-[36em]`} src={`${import.meta.env.VITE_LOCALHOST_URL}${currentImage.imagePath}`} alt="Sunset in the mountains" />
+                <img className={`${style.imgAnimation} w-[36em]`} src={`${import.meta.env.VITE_API_URL}${currentImage.imagePath}`} alt="Sunset in the mountains" />
                 <IconContext.Provider value={{ size: '40px' }}>
                     <button className="absolute top-[50%] right-2 p-2 rounded-md bg-gray-800 bg-opacity-30" onClick={prevImage}><FaChevronRight /></button>
                     <button className="absolute right-0 top-[50%] left-2 p-2 rounded-md bg-gray-800 bg-opacity-30" onClick={nextImage}><FaChevronLeft /></button>

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useAddNewBrandMutation } from "../../api/apiSlice";
 import { FormProvider, useForm } from "react-hook-form";
-import  CustomInput  from "../UI/CustomInput";
+import CustomInput from "../UI/CustomInput";
 import { CustomTextarea } from "../UI/CustomTextarea";
 import { toast } from "react-toastify";
 import { CustomInputFile } from "../UI/custom-elements/CustomInputFile";
@@ -14,14 +14,14 @@ const BrandNew = () => {
     const [fileAdded, setFileAdded] = useState(null) as any
     const [addNewBrand] = useAddNewBrandMutation()
     const notifySuccess = () => toast("Бренд додано!")
-  
+    const notifyError = () => toast.error("Помилка при додаванні бренду!")
     const onFileChange = (fileChangeEvent: any) => {
         console.log("fileEvent")
         console.log(fileChangeEvent.target.files[0]);
         setFileAdded(fileChangeEvent.target.files[0])
         setImgPreview(URL.createObjectURL(fileChangeEvent.target.files[0]))
     }
-    const onSubmit = methods.handleSubmit((data: any) => {
+    const onSubmit = methods.handleSubmit(async (data: any) => {
         const { name, description } = data
         const formData = new FormData();
         formData.append('name', name);
@@ -31,11 +31,19 @@ const BrandNew = () => {
             formData.append('file', fileAdded, fileAdded.name);
         }
         try {
-            addNewBrand(formData).unwrap()
-            notifySuccess();
-        } catch (error) {
-            console.log(error);
-        }
+             addNewBrand(formData).unwrap() as any
+            notifySuccess()
+          } catch (error) {
+            console.error('rejected', error);
+            notifyError()
+          }
+         
+            // if (response.status === 200 || response.status === 201)
+            //     notifySuccess();
+            // else {
+            //     notifyError()
+            // }
+    
 
     })
     return (
@@ -77,28 +85,27 @@ const BrandNew = () => {
                     </div>
                     <div className="mb-2 flex flex-col">
                         <label className="mb-2" htmlFor="image">Логотип</label>
-                        <CustomInputFile 
-                        type="file" 
-                        label="image" 
-                        id="image" 
-                        onChangeEvent={onFileChange}
-                        validation={{
-                            required: {
-                                value: true,
-                                message: 'Обовязкове поле'
-                            },
-                            
-                        }}
+                        <CustomInputFile
+                            type="file"
+                            label="image"
+                            id="image"
+                            onChangeEvent={onFileChange}
+                            validation={{
+                                required: {
+                                    value: true,
+                                    message: 'Обовязкове поле'
+                                },
+                            }}
                         />
                         {/* <input onChange={(e) => { onFileChange(e) }} type="file" name="image" id="image" /> */}
                         <img className="rounded-sm mt-2 w-[145px] h-[145px] self-center" src={imgPreview} id="imgPreview" />
                     </div>
                     <div className="self-end">
-                        <button className="rounded-md bg-green-400 px-2 py-1" onClick={onSubmit}>Створити</button>
+                        <button className="bg-green-400 hover:bg-green-200 text-white font-bold py-2 px-4 rounded" onClick={onSubmit}>Створити</button>
                     </div>
                 </form>
             </FormProvider>
-          
+
         </div>
     );
 }

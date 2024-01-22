@@ -7,7 +7,6 @@ type RegisterValues = {
     password: string;
     passwordConfirm: string;
     username: string;
-    mobilePhone: string;
 }
 const Register = () => {
     const history = useNavigate();
@@ -17,7 +16,19 @@ const Register = () => {
             console.log(response.status, "response")
             history('/login');
         }).catch((error) => {
-            console.log(error.response.data.message)
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data.message);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+            }
         })
     })
     return (
@@ -56,7 +67,7 @@ const Register = () => {
                                 placeholder="username" />
                             {errors?.username && <p className="text-red-600">{errors.username.message}</p>}
                         </div>
-                        <div className="mb-4">
+                        {/* <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="mobilePhone">
                                 Телефон
                             </label>
@@ -64,14 +75,11 @@ const Register = () => {
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 {...register("mobilePhone", {
                                     required: "Введіть номер телефону",
-                                    pattern:{
-                                        value: /^\+380\d{3}\d{2}\d{2}\d{2}$/,
-                                        message: "Невірний формат номеру телефону"
-                                    }
+                                   
                                 })}
-                                placeholder="+380-000-000-0000" />
+                                placeholder="380-000-000-0000" />
                             {errors?.mobilePhone && <p className="text-red-600">{errors.mobilePhone.message}</p>}
-                        </div>
+                        </div> */}
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                                 Пароль

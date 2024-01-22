@@ -11,7 +11,6 @@ type LoginValues = {
 };
 
 const Login = () => {
-
     const history = useNavigate();
     const dispatch = useDispatch<AppDispatch>();
     const { register, handleSubmit, formState: { errors } } = useForm<LoginValues>();
