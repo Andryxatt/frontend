@@ -1,6 +1,5 @@
 import { useGetBrandsQuery, useGetCategoriesQuery } from "../../api/apiSlice";
 import { setActiveFilters } from '../../store/slices/blacklist.slice';
-import { IBrand } from "../../store/slices/brand.slice";
 import style from './ActiveBar.module.sass';
 import { FaXmark } from "react-icons/fa6";
 import { useAppSelector } from "../../store/hooks";

@@ -18,7 +18,7 @@ const ProductList = () => {
     isLoading,
     isSuccess,
     isError
-  } = useGetProductsQuery({ page, limit, search, filters: [] });
+  } = useGetProductsQuery<any>({ page, limit, search, filters: [] });
   React.useEffect(() => {
     if (!isLoading) {
       // Focus the button after data is loaded
@@ -32,7 +32,7 @@ const ProductList = () => {
   if (isLoading) {
     content = <></>
   } else if (isSuccess) {
-    content = data?.products?.map((product: Product) =>
+    content = data?.products.map((product: Product) =>
       <ProductItem key={product.id} product={product} />
     )
   } else if (isError) {
@@ -66,10 +66,10 @@ const ProductList = () => {
         </tbody>
         <button
           ref={loadButtonRef}
-          disabled={isLoading || data.total <= data.products?.length}
-          className={`w-[220px] self-center mt-4 p-4 rounded-lg ${isLoading || data.total <= data.products?.length ? "bg-gray-400" : "bg-green-400"
+          disabled={isLoading || data?.total <= data?.products?.length}
+          className={`w-[220px] self-center mt-4 p-4 rounded-lg ${isLoading || data.total <= data?.products?.length ? "bg-gray-400" : "bg-green-400"
             }`}
-          onClick={() => { setLimit((cur) => data.total > data.products?.length ? cur += 10 : cur) }}
+          onClick={() => { setLimit((cur) => data?.total > data?.products?.length ? cur += 10 : cur) }}
         >
           {isLoading ? (
             // Show a loading spinner when the data is loading

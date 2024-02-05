@@ -4,7 +4,7 @@ import DashboardLayout from "../../layouts/DashboardLayout";
 
 const LoadDataWithFile: React.FC = () => {
     const [filePath, setFilePath] = useState<string | null>(null);
-    const [fileImage, setFileImage] = useState<FileList | null>(null);
+    // const [fileImage, setFileImage] = useState<FileList | null>(null);
     const excelData = useExcelLoader(filePath || ''); // Pass an empty string if filePath is null
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +16,7 @@ const LoadDataWithFile: React.FC = () => {
     const handleFileImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (files) {
-            setFileImage(files);
+            console.log(files);
         }
     };
     
