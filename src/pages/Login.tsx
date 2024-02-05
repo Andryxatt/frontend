@@ -1,4 +1,3 @@
-import http from "../utils/axios.config";
 import { Link, useNavigate } from 'react-router-dom';
 import { setToken, setUser } from "../store/slices/user.slice";
 import { useDispatch } from "react-redux";
