@@ -27,7 +27,7 @@ const Products = () => {
   return (
     <MainLayout>
       <div className="flex flex-row justify-between items-center">
-        <span> {products.length} Товарів </span>
+        <span> {products?.length} Товарів </span>
         <div className="flex flex-row items-center justify-between">
           <button onClick={() => setGridSize(3)} className="pr-2"><BsFillGrid3X3GapFill /></button>
           <button onClick={() => setGridSize(4)} className="pr-2"><BsFillGridFill /></button>
