@@ -1,39 +1,91 @@
+import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { useNewSizesMutation } from "../../api/apiSlice";
+import CustomInput from "../UI/CustomInput";
 const SizeNew = () => {
-
     const [addNewSize] = useNewSizesMutation()
-    const submitForm = async (event: any) => {
-        event.preventDefault();
-        const CM = event.currentTarget.cm.value;   
-        const EU = event.currentTarget.eu.value;
-        const USA = event.currentTarget.usa.value;
-        const Length = event.currentTarget.length.value;
-        await addNewSize({CM, EU, USA, Length}).unwrap()
-    }
+    const methods = useForm()
+    const notifySuccess = () => toast("Розмір додано!")
+    const notifyError = () => toast.error("Помилка при додаванні розміру!")
+    const onSubmit = methods.handleSubmit((data: any) => {
+        const { CM, EU, USA, Length} = data
+        try {
+            addNewSize({ CM, EU, USA, Length }).unwrap()
+            notifySuccess()
+        } catch (error) {
+            notifyError()
+            console.log(error);
+        }
+    })
     return (
         <div>
-            <form className="p-5 bg-yellow-200 flex flex-col justify-start" onSubmit={(e) => submitForm(e)}>
-                <h1 className="font-bold mb-4">Create new Size</h1>
-                <div className="mb-2 flex flex-col">
-                    <label className="mb-2" htmlFor="cm">CM</label>
-                    <input className="rounded-sm p-1" type="text" name="cm" id="cm" />
-                </div>
-                <div className="mb-2 flex flex-col">
-                    <label className="mb-2" htmlFor="eu">EU</label>
-                    <input className="rounded-sm p-1" type="text" name="eu" id="eu" />
-                </div>
-                <div className="mb-2 flex flex-col">
-                    <label className="mb-2" htmlFor="namebrand">USA</label>
-                    <input className="rounded-sm p-1" type="text" name="usa" id="usa" />
-                </div>
-                <div className="mb-2 flex flex-col">
-                    <label className="mb-2" htmlFor="length">Довжина устілки</label>
-                    <input className="rounded-sm p-1" type="text" name="length" id="length" />
-                </div>
-                <div className="self-end">
-                    <button className="rounded-md bg-green-400 px-2 py-1" type="submit">Create</button>
-                </div>
-            </form>
+            <FormProvider {...methods}>
+                <form className="p-5 bg-yellow-200 flex flex-col justify-start"
+                    onSubmit={e => e.preventDefault()}
+                    noValidate
+                    autoComplete="off">
+                    <h1 className="font-bold mb-4">Create new Size</h1>
+                    <div className="mb-2 flex flex-col">
+                        <CustomInput
+                            label="CM"
+                            type="text"
+                            id="CM"
+                            placeholder="0"
+                            validation={{
+                                required: {
+                                    value: true,
+                                    message: 'Обовязкове поле',
+                                }
+                            }}
+                        />
+                    </div>
+                    <div className="mb-2 flex flex-col">
+                        <CustomInput
+                            label="EU"
+                            type="text"
+                            id="EU"
+                            placeholder="0"
+                            validation={{
+                                required: {
+                                    value: true,
+                                    message: 'Обовязкове поле',
+                                }
+                            }}
+                        />
+                    </div>
+                    <div className="mb-2 flex flex-col">
+                        <CustomInput
+                            label="US"
+                            type="text"
+                            id="USA"
+                            placeholder="0"
+                            validation={{
+                                required: {
+                                    value: true,
+                                    message: 'Обовязкове поле',
+                                }
+                            }}
+                        />
+                    </div>
+                    <div className="mb-2 flex flex-col">
+                        <CustomInput
+                            label="Жовжина устілки"
+                            type="text"
+                            id="Length"
+                            placeholder="0"
+                            validation={{
+                                required: {
+                                    value: true,
+                                    message: 'Обовязкове поле',
+                                }
+                            }}
+                        />
+                    </div>
+                    <div className="self-end">
+                        <button className="bg-green-400 hover:bg-green-200 text-white font-bold py-2 px-4 rounded" onClick={onSubmit}>Створити</button>
+                    </div>
+                </form>
+            </FormProvider>
         </div>
     );
 }

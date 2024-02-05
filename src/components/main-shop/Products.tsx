@@ -5,56 +5,45 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "../../store/slices/product.slice";
 import { AppDispatch } from "../../store/store";
-import { loadMoreProduct, setActiveFilters } from "../../store/slices/blacklist.slice";
-import { useLocation } from "react-router-dom";
-import { FaFilter } from "react-icons/fa6";
+import { loadMoreProduct } from "../../store/slices/blacklist.slice";
 import { BsFillGrid3X3GapFill, BsFillGridFill } from "react-icons/bs";
 import MainLayout from "../../layouts/MainLayout";
+import ActiveBar from "./ActiveBar";
 const Products = () => {
-  const location = useLocation();
-  const isActiveFilter = useAppSelector((state) => state.blackListSlice.isActive);
   const products = useAppSelector((state) => state.productSlice.products);
   const limit = useAppSelector((state) => state.blackListSlice.limit);
-  const total = useAppSelector((state) => state.productSlice.total);
-  const [gridSize, setGridSize] = useState(4);
-  const columnClass = `grid grid-cols-${gridSize} gap-4 mt-4 mb-4`;
+  const filters = useAppSelector((state) => state.blackListSlice.filters);
+  const search = useAppSelector((state) => state.blackListSlice.search);
+  const [gridSize, setGridSize] = useState(3);
   const dispatch = useDispatch<AppDispatch>();
-  // const fetchData = useCallback(async () => {
-  //   const params = { page: 1, limit: limit !== undefined ? limit : 10, search: "" };
-  //   await dispatch(fetchProducts(params));
-  // }, [limit]);
-
   useEffect(() => {
-   const products = fetchProducts({ page: 1, limit: 10, search: ""});
-  dispatch(products);
+    const products = fetchProducts({ page: 1, limit: 10, search, filters: JSON.stringify(filters) });
+    dispatch(products);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [limit]);
+  }, [limit, filters]);
   const loadMore = () => {
     dispatch(loadMoreProduct(limit + 10));
   }
-  
-
-  // Define the dynamic column class using Tailwind CSS classes
-  
   return (
     <MainLayout>
-      <p>Головна {location.pathname}</p>
-      <hr className="mt-4" />
       <div className="flex flex-row justify-between items-center">
-        <span> {total} Товарів </span>
+        <span> {products.length} Товарів </span>
         <div className="flex flex-row items-center justify-between">
-          <button className="flex p-4 items-center mr-3" onClick={() => dispatch(setActiveFilters(!isActiveFilter))}><FaFilter /> <span className="pl-2">Фільтри і сортування</span></button>
-          <button onClick={()=>setGridSize(4)} className="pr-2"><BsFillGrid3X3GapFill/></button>
-          <button onClick={()=>setGridSize(2)} className=""><BsFillGridFill /></button>
+          <button onClick={() => setGridSize(3)} className="pr-2"><BsFillGrid3X3GapFill /></button>
+          <button onClick={() => setGridSize(4)} className="pr-2"><BsFillGridFill /></button>
         </div>
 
       </div>
       <hr className="mb-4" />
-      <div className={columnClass}>
-        {
-          products?.map((product: Product) => <SingleProduct key={product.id} product={product} />)
-        }
+      <div className="flex flex-row">
+        <div className={`sm:flex flex-wrap md:grid ${gridSize === 3 ? 'grid-cols-3' : 'grid-cols-4'}`}>
+          {
+            products?.map((product: Product) => <SingleProduct key={product.id} product={product} />)
+          }
+        </div>
+        <ActiveBar />
       </div>
+
       <button onClick={() => { loadMore() }}>Load More</button>
     </MainLayout>
   );

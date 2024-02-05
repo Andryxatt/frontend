@@ -4,6 +4,7 @@ import type { RootState } from './../store/store'
 import { fetchProductSuccess } from '../store/slices/product.slice'
 import { brandsApi } from './brands.api'
 import { categoriesApi } from './categories.api'
+import { productsApi } from './products.api'
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
@@ -25,9 +26,15 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
       ...brandsApi(builder),
       ...categoriesApi(builder),
+      ...productsApi(builder),
     getSeasones: builder.query({
       // The URL for the request is '/fakeApi/posts'
       query: () => '/seasones',
+      providesTags: ['Seasones']
+    }),
+    getSeason: builder.query({
+      // The URL for the request is '/fakeApi/posts'
+      query: (id) => `/seasones/${id}`,
       providesTags: ['Seasones']
     }),
     addNewSeason: builder.mutation({
@@ -54,10 +61,17 @@ export const apiSlice = createApi({
       invalidatesTags: ['Seasones']
     }),
 
-    getGender: builder.query({
+    getGenders: builder.query({
       query: () => '/genders',
       providesTags: ['Genders']
     }),
+    getGender: builder.query({
+      query: (id) =>({
+        url: `/genders/${id}`,
+        method: 'GET'
+      }),
+    }),
+
     addNewGender: builder.mutation({
       query: (newGender) => ({
         url: '/genders',
@@ -109,9 +123,18 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Colores']
     }),
-
+    getColor: builder.query({
+      // The URL for the request is '/fakeApi/posts'
+      query: (id) => `/colores/${id}`,
+      providesTags: ['Colores']
+    }),
     getDiscounts: builder.query({
       query: () => '/discounts',
+      providesTags: ['Discounts']
+    }),
+    getDiscount: builder.query({
+      // The URL for the request is '/fakeApi/posts'
+      query: (id) => `/discounts/${id}`,
       providesTags: ['Discounts']
     }),
     addNewDiscounts: builder.mutation({
@@ -140,6 +163,11 @@ export const apiSlice = createApi({
 
     getFeatures: builder.query({
       query: () => '/features',
+      providesTags: ['Features']
+    }),
+    getFeature: builder.query({
+      // The URL for the request is '/fakeApi/posts'
+      query: (id) => `/features/${id}`,
       providesTags: ['Features']
     }),
     addNewFeatures: builder.mutation({
@@ -198,9 +226,19 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['SubCategories']
     }),
+    getSubCategory: builder.query({
+      // The URL for the request is '/fakeApi/posts'
+      query: (id) => `/sub-categories/${id}`,
+      providesTags: ['SubCategories']
+    }),
     getSizes: builder.query({
       // The URL for the request is '/fakeApi/posts'
       query: () => '/sizes',
+      providesTags: ['Sizes']
+    }),
+    getSize: builder.query({
+      // The URL for the request is '/fakeApi/posts'
+      query: (id) => `/sizes/${id}`,
       providesTags: ['Sizes']
     }),
     newSizes: builder.mutation({
@@ -226,69 +264,7 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Sizes']
     }),
-    getProducts: builder.query({
-      query: ({ page, limit, search }) => `/products?page=${page}&limit=${limit}&search=${search}`,
-      providesTags: ['Products'],
-      async onQueryStarted(_args, { queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          console.log(data, 'data api');
-        }
-        catch (err) {
-          console.log(err);
-        }
-      },
-    }),
-    getNewestProducts: builder.query<any, void>({
-      // Use '/products/topNewProducts' as the query function to fetch the newest products
-      query: () => '/products/topNewProducts',
-      providesTags: ['Products'],
-      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          console.log(arg, 'args');
-          dispatch(fetchProductSuccess(data));
-        }
-        catch (err) {
-          console.log(err);
-        }
-      },
-    }),
-    getProductById: builder.query({
-      // The URL for the request is '/fakeApi/posts'
-      query: (id) => `/products/${id}`,
-      providesTags: ['Products']
-    }),
-    newProduct: builder.mutation({
-      query: (newProduct) => ({
-        url: '/products',
-        method: 'POST',
-        body: newProduct
-      }),
-      invalidatesTags: ['Products']
-    }),
-    updateProduct: builder.mutation({
-      query: (updateProduct) => ({
-        url: `/products/${updateProduct.id}`,
-        method: 'PATCH',
-        body: updateProduct.data
-      }),
-      invalidatesTags: ['Products']
-    }),
-    deleteProduct: builder.mutation({
-      query: (id) => ({
-        url: `/products/${id}`,
-        method: 'DELETE'
-      }),
-      invalidatesTags: ['Products']
-    }),
-    deleteProductImage: builder.mutation({
-      query: (id) => ({
-        url: `/product-images/${id}`,
-        method: 'DELETE'
-      }),
-      invalidatesTags: ['Products']
-    }),
+   
   })
 })
 
@@ -311,15 +287,17 @@ export const {
   useNewSubCategoryMutation,
   useUpdateSubCategoryMutation,
   useDeleteSubCategoryMutation,
+  useGetSubCategoryQuery,
   //Size
   useGetSizesQuery,
   useNewSizesMutation,
   useUpdateSizesMutation,
   useDeleteSizesMutation,
+  useGetSizeQuery,
   //Product
   useGetProductsQuery,
   useNewProductMutation,
-  useUpdateProductMutation,
+  useUpdateSingleProductMutation,
   useDeleteProductMutation,
   useGetProductByIdQuery,
   useGetNewestProductsQuery,
@@ -329,29 +307,33 @@ export const {
   useAddNewSeasonMutation,
   useUpdateSeasonMutation,
   useDeleteSeasonMutation,
+  useGetSeasonQuery,
   //Gender
-  useGetGenderQuery,
+  useGetGendersQuery,
   useAddNewGenderMutation,
   useUpdateGenderMutation,
   useDeleteGenderMutation,
-
+  useGetGenderQuery,
   //Colores
   useGetColoresQuery,
   useAddNewColoresMutation,
   useUpdateColoresMutation,
   useDeleteColoresMutation,
+  useGetColorQuery,
 
   //Discounts
   useGetDiscountsQuery,
   useAddNewDiscountsMutation,
   useUpdateDiscountsMutation,
   useDeleteDiscountsMutation,
+  useGetDiscountQuery,
 
   //Features
   useGetFeaturesQuery,
   useAddNewFeaturesMutation,
   useUpdateFeaturesMutation,
   useDeleteFeaturesMutation,
+  useGetFeatureQuery,
   
 
   useDeleteProductImageMutation

@@ -1,7 +1,7 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useNewCategoryMutation } from "../../api/apiSlice";
-import  CustomInput  from "../UI/CustomInput";
+import CustomInput from "../UI/CustomInput";
 import { CustomTextarea } from "../UI/CustomTextarea";
 const CategoryNew = () => {
     const methods = useForm()
@@ -11,7 +11,7 @@ const CategoryNew = () => {
     const onSubmit = methods.handleSubmit((data: any) => {
         const { name, description } = data
         try {
-            addNewCategory({name, description}).unwrap()
+            addNewCategory({ name, description }).unwrap()
             notifySuccess()
         } catch (error) {
             notifyError()
@@ -21,7 +21,8 @@ const CategoryNew = () => {
     return (
         <div>
             <FormProvider {...methods}>
-                <form className="p-5 bg-yellow-200 flex flex-col justify-start" onSubmit={e => e.preventDefault()}
+                <form className="p-5 bg-yellow-200 flex flex-col justify-start"
+                    onSubmit={e => e.preventDefault()}
                     noValidate
                     autoComplete="off">
                     <h1 className="font-bold mb-4">Додати категорію товару</h1>
@@ -60,7 +61,7 @@ const CategoryNew = () => {
                     </div>
                 </form>
             </FormProvider>
-          
+
         </div>
     );
 }

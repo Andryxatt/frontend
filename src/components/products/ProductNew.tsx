@@ -7,7 +7,7 @@ import {
     useGetSybCategoriesQuery,
     useNewProductMutation,
     useGetDiscountsQuery,
-    useGetGenderQuery,
+    useGetGendersQuery,
     useGetFeaturesQuery,
     useGetSeasonesQuery
 } from '../../api/apiSlice'
@@ -44,8 +44,6 @@ type SelectFeatureOption = {
 }
 const ProductNew = () => {
     const methods = useForm()
-    // const [validSize, setValidSize] = useState<boolean>(true)
-    // const [validSizeQuantity, setValidSizeQuantity] = useState<boolean>(true)
     const [isSizesOpen, setIsSizesOpen] = useState<boolean>(true)
     const [isFeatureOpen, setIsFeaturesOpen] = useState<boolean>(true)
     const refQuantitySize = useRef<any>(null)
@@ -59,7 +57,7 @@ const ProductNew = () => {
     } = useGetBrandsQuery(null, { refetchOnMountOrArgChange: true }) as any
     const { data: genders,
         isLoading: isLoadingGenders,
-    } = useGetGenderQuery(null, { refetchOnMountOrArgChange: true }) as any
+    } = useGetGendersQuery(null, { refetchOnMountOrArgChange: true }) as any
     const { data: seasones,
         isLoading: isLoadingSeasones,
     } = useGetSeasonesQuery(null, { refetchOnMountOrArgChange: true }) as any

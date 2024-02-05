@@ -10,9 +10,13 @@ const SingleProduct = ({ product }: any) => {
         navigate(`/products/${product.id}`);
     }
     return (
-        <div className="rounded overflow-hidden shadow-lg w-full col-span-1 ">
+        <div className="rounded overflow-hidden shadow-lg w-full relative">
             <div className="cursor-pointer" onClick={()=>showProductDetails(product)}>
-                <img className="w-full" src={`${import.meta.env.VITE_API_URL}${product?.images[0]?.imagePath}`} alt="Sunset in the mountains" />
+                <img className="w-full" src={`${import.meta.env.VITE_API_URL}${product?.images[0]?.imagePath}`} alt="Sunset in the mountains" >
+                   
+                </img>
+                    <span className="absolute top-0">{product?.status}</span>
+                    <button className="absolute right-0 top-0">Like</button>
                 <div className="px-6 py-4">
                     <div className="font-bold text-xl mb-2">{product?.name}</div>
                     <p className="text-gray-700 text-base">
@@ -20,7 +24,8 @@ const SingleProduct = ({ product }: any) => {
                     </p>
                 </div>
             </div>
-            <div className="px-6 pt-1 pb-2">
+            <div className="px-2 pt-1 pb-2">
+                <h3>{product?.brand.name}</h3>
                 <ul className="flex flex-row">
                     {product?.sizes.map((size: any) => (
                         <li className="px-1 border-2 border-gray-200 mr-1" key={size.id}>
