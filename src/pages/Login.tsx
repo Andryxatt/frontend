@@ -1,10 +1,10 @@
+import http from "../utils/axios.config";
 import { Link, useNavigate } from 'react-router-dom';
 import { setToken, setUser } from "../store/slices/user.slice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store/store";
 import { useForm } from 'react-hook-form';
 import MainLayout from "../layouts/MainLayout";
-import axios from "axios";
 type LoginValues = {
     email: string;
     password: string;
@@ -15,23 +15,14 @@ const Login = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { register, handleSubmit, formState: { errors } } = useForm<LoginValues>();
     const onSubmit = handleSubmit((data) => {
-        console.log(data)
-        axios.post('https://apistepinstyle.com/auth/login', data).then((response) => {
+        http.post("auth/login", data).then((response:any) => {
             console.log(response)
             dispatch(setToken(response.data.token))
             dispatch(setUser(response.data.user))
             history('/');
-        }).catch((error) => {
+        }).catch((error:any) => {
             console.log(error)
-        })
-        // http.post("auth/login", data).then((response) => {
-        //     console.log(response)
-        //     dispatch(setToken(response.data.token))
-        //     dispatch(setUser(response.data.user))
-        //     history('/');
-        // }).catch((error) => {
-        //     console.log(error)
-        // }) 
+        }) 
     });
     return (
             <MainLayout>
