@@ -18,7 +18,7 @@ const ProductList = () => {
     isLoading,
     isSuccess,
     isError
-  } = useGetProductsQuery<any>({ page, limit, search, filters: [] });
+  } = useGetProductsQuery({ page, limit, search, filters: [] });
   React.useEffect(() => {
     if (!isLoading) {
       // Focus the button after data is loaded
