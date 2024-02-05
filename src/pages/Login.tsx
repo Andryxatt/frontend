@@ -16,11 +16,13 @@ const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<LoginValues>();
     const onSubmit = handleSubmit((data) => {
         console.log(data)
-        axios.post('htpps://apistepinstyle.com/api/auth/login', data).then((response) => {
+        axios.post('https://apistepinstyle.com/api/auth/login', data).then((response) => {
             console.log(response)
             dispatch(setToken(response.data.token))
             dispatch(setUser(response.data.user))
             history('/');
+        }).catch((error) => {
+            console.log(error)
         })
         // http.post("auth/login", data).then((response) => {
         //     console.log(response)
