@@ -6,6 +6,16 @@ import ProductItem from "./ProductItem";
 import ProductNew from "./ProductNew";
 import React from "react";
 import { Link } from "react-router-dom";
+type ProductListProps = {
+  data: {
+    products: Product[];
+    total: number;
+  };
+  isLoading: boolean;
+  isError: boolean;
+  isSuccess: boolean;
+};
+
 const ProductList = () => {
   const [showProductNew, setShowProductNew] = useState(false)
   const [page,] = useState(1);
@@ -17,7 +27,7 @@ const ProductList = () => {
     isLoading,
     isSuccess,
     isError
-  } = useGetProductsQuery({ page, limit, search, filters: [] });
+  } = useGetProductsQuery<ProductListProps>({ page, limit, search, filters: [] });
   React.useEffect(() => {
     if (!isLoading) {
       // Focus the button after data is loaded
