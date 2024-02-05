@@ -7,7 +7,6 @@ import CustomInput from "../UI/CustomInput";
 import { CustomTextarea } from "../UI/CustomTextarea";
 import { toast } from "react-toastify";
 import { CustomInputFile } from "../UI/custom-elements/CustomInputFile";
-
 const BrandNew = () => {
     const methods = useForm()
     const [imgPreview, setImgPreview] = useState(null) as any
@@ -16,8 +15,6 @@ const BrandNew = () => {
     const notifySuccess = () => toast("Бренд додано!")
     const notifyError = () => toast.error("Помилка при додаванні бренду!")
     const onFileChange = (fileChangeEvent: any) => {
-        console.log("fileEvent")
-        console.log(fileChangeEvent.target.files[0]);
         setFileAdded(fileChangeEvent.target.files[0])
         setImgPreview(URL.createObjectURL(fileChangeEvent.target.files[0]))
     }
@@ -37,14 +34,6 @@ const BrandNew = () => {
             console.error('rejected', error);
             notifyError()
           }
-         
-            // if (response.status === 200 || response.status === 201)
-            //     notifySuccess();
-            // else {
-            //     notifyError()
-            // }
-    
-
     })
     return (
         <div>

@@ -1,20 +1,19 @@
 import DashboardLayout from "../../layouts/DashboardLayout";
 import { useParams } from "react-router";
-import { useGetCategoryQuery, useUpdateCategoryMutation } from "../../api/apiSlice";
+import { useGetGenderQuery, useUpdateGenderMutation } from "../../api/apiSlice";
 import { toast } from "react-toastify";
-import  CustomInput  from "../UI/CustomInput";
+import CustomInput from "../UI/CustomInput";
 import { FormProvider, useForm } from "react-hook-form";
-import { CustomTextarea } from "../UI/CustomTextarea";
-const CategoryEdit = () => {
+const GenderEdit = () => {
     const { id } = useParams<{ id: string }>();
     const methods = useForm()
-    const { data: category, isSuccess } = useGetCategoryQuery<any>(id, { refetchOnMountOrArgChange: true });
-    const [updateCategory] = useUpdateCategoryMutation();
-    const notifySuccess = () => toast("Категорія оновлена!");
+    const { data: gender, isSuccess } = useGetGenderQuery<any>(id, { refetchOnMountOrArgChange: true });
+    const [updateGender] = useUpdateGenderMutation();
+    const notifySuccess = () => toast("Стать оновлено!");
     const onSubmit = methods.handleSubmit((data: any) => {
-        const { name, description } = data
+        const { name } = data
         try {
-            updateCategory({ id: category.id, name, description }).unwrap();
+            updateGender({ id: gender.id, name }).unwrap();
             notifySuccess();
         } catch (error) {
             console.log(error);
@@ -30,7 +29,7 @@ const CategoryEdit = () => {
                         <div>
                             <CustomInput
                                 label="Назва"
-                                value={category?.name}
+                                value={gender?.name}
                                 type="text"
                                 id="name"
                                 placeholder="Назва"
@@ -46,29 +45,11 @@ const CategoryEdit = () => {
                                 }}
                             />
                         </div>
-                        <div>
-                            <CustomTextarea
-                            value={category?.description}
-                             label="Опис"
-                              id="description" 
-                              placeholder="Опис" 
-                              validation={{
-                                required: {
-                                    value: true,
-                                    message: 'Обовязкове поле'
-                                },
-                                minLength: {
-                                    value: 10,
-                                    message: 'Мінімум 10 символів'
-                                }
-                            }} />
-                        </div>
                         <button className="bg-blue-400 hover:bg-blue-200 mr-2 text-white font-bold py-2 px-4 rounded" onClick={onSubmit}>Оновити</button>
                     </form>
                 }
             </FormProvider>
-         
         </DashboardLayout>
     )
 }
-export default CategoryEdit;
+export default GenderEdit;

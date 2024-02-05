@@ -26,7 +26,7 @@ const CategoryList = () => {
   } else if (isSuccess) {
     content = categories?.map((category: Category) => <CategoryItem key={category.id} category={category} />)
   } else if (isError) {
-    content = <><tr><td>Немає данних</td></tr></>
+    content = <tr><td>Немає данних</td></tr>
   }
   return (
     <DashboardLayout>
@@ -36,9 +36,9 @@ const CategoryList = () => {
         <thead className="border-b font-medium dark:border-neutral-500">
           <tr>
             <th scope="col" className="px-6 py-4">ID</th>
-            <th scope="col" className="px-6 py-4">Name</th>
-            <th scope="col" className="px-6 py-4">Description</th>
-            <th scope="col" className="px-6 py-4">Action</th>
+            <th scope="col" className="px-6 py-4">Назва</th>
+            <th scope="col" className="px-6 py-4">Опис</th>
+            <th scope="col" className="px-6 py-4">Дії</th>
           </tr>
         </thead>
         <tbody>

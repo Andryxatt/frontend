@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store/store';
 import { useAppSelector } from '../../store/hooks';
 import { fetchProducts } from '../../store/slices/product.slice';
+import { setSearch } from '../../store/slices/blacklist.slice';
 type CustomModalProps = {
     setIsSearchOpen: (isOpen: boolean) => void;
     isSearchOpen: boolean;
@@ -12,6 +13,7 @@ const CustomModal: React.FC<CustomModalProps> = ({ setIsSearchOpen, isSearchOpen
     const [inputValue, setInputValue] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
     const limit = useAppSelector((state) => state.blackListSlice.limit);
+    const filters = useAppSelector((state) => state.blackListSlice.filters);
     const dispatch = useDispatch<AppDispatch>();
     // Function to handle clicks outside the input element
     const handleClickOutside = (event: MouseEvent) => {
@@ -21,12 +23,15 @@ const CustomModal: React.FC<CustomModalProps> = ({ setIsSearchOpen, isSearchOpen
         }
     };
     const searchProducts = async (search: string) => {
-        const params = { page: 1, limit: limit, search };
+        console.log('search', search);
+        console.log('filters', filters);
+        const params = { page: 1, limit: limit, search, filters: JSON.stringify(filters)};
         await dispatch(fetchProducts(params));
     }
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const newVal = e.target.value;
         setInputValue(newVal);
+        dispatch(setSearch(newVal));
         searchProducts(newVal);
     };
     const handleBlur = () => {

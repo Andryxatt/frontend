@@ -20,8 +20,7 @@ export const fetchProducts = createAsyncThunk<ProductPagination, any>(
   'products/fetchProducts',
   async (args: any, thunkAPI) => {
     try {
-      const response = await ProductDataService.getProducts(args.page, args.limit, args.search);
-      console.log(response, 'response');
+      const response = await ProductDataService.getProducts(args.page, args.limit, args.search, args?.filters);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -38,7 +37,6 @@ export const productSlice = createSlice({
       state.error = null;
     },
     fetchProductSuccess(state, action: PayloadAction<ProductPagination>) {
-      //fetch products from AsyncThunk and set to state
       state.loading = false;
       state.products = action.payload.products;
       state.total = action.payload.total;
@@ -48,11 +46,7 @@ export const productSlice = createSlice({
       state.error = action.payload;
     },
     selectProduct(state, action: PayloadAction<number>) {
-      console.log(action.payload, 'action.payload');
-      // Find the product with the given id from state.products
       const selectedProduct = state.products.find((product) => product.id === action.payload);
-
-      // Set the selected product in the state
       state.selectedProduct = selectedProduct || null;
     },
   },

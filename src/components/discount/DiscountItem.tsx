@@ -1,44 +1,27 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useUpdateDiscountsMutation, useDeleteDiscountsMutation} from "../../api/apiSlice";
 import { Discount } from "../../models/discount.model";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 const DiscountItem = ({ discount }: { discount: Discount}) => {
-    const [percentage, setPercentage] = useState(discount.percentage);
-    const [updateDiscount] = useUpdateDiscountsMutation();
+    const notifyDelete = () => toast("Знижку видалено!")
     const [deleteDiscount] = useDeleteDiscountsMutation();
-    const [isEdit, setIsEdit] = useState(false);
-    const changeToEdit = () => {
-        setIsEdit(!isEdit);
-    }
-    const update = async (discount:Discount)=>{
-        updateDiscount({id:discount.id, percentage}).unwrap();
-    }
+
+  
 
     return (
-        <div className="my-[2em] p-3 bg-gray-200 flex flex-row justify-between items-center">
-            <div>{ discount.id }</div>
-            <div>
-                {
-                    isEdit ? <input className="edit-input" onChange={(e)=>setPercentage(+e.target.value)} type="number" defaultValue={discount.percentage} /> : <p>{discount.percentage}</p>
-                }
-
-            </div>
-            <div>
-                {
-                    !isEdit ? <button className="bg-orange-200 hover:bg-orange-400 text-white font-bold py-2 px-4 rounded mr-2" onClick={changeToEdit}>Рудагувати</button> : null
-                }
-                {
-                    isEdit ? <><button className="bg-blue-200 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded mr-2" onClick={() => {
-                        update(discount)
-                        setIsEdit(!isEdit);
-                    }}>Оновити</button> <button onClick={()=>setIsEdit(!isEdit)} className="bg-purple-200 hover:bg-purple-400 text-white font-bold py-2 px-4 rounded mr-2">Відмінити</button> </>: null
-                }
-                <button onClick={()=>deleteDiscount(discount.id).then(()=>{
-                    alert("deleted");
-                })} className="bg-red-200 hover:bg-red-400 text-white font-bold py-2 px-4 rounded">Видалити</button>
-            </div>
-        </div>
+        <tr className="border-b dark:border-neutral-500">
+            <td className="whitespace-nowrap px-6 py-4 font-medium">{ discount.id }</td>
+            <td>
+                    {discount.percentage}
+            </td>
+            <td className="whitespace-nowrap px-6 py-4">
+                <Link to={`/dashboard/discounts/${discount?.id}`} className="bg-orange-400 hover:bg-orange-200 text-white font-bold py-2 px-4 rounded mr-2">Рудагувати</Link>
+                <button onClick={() => deleteDiscount(discount.id).then(() => {
+                    notifyDelete()
+                })} className="bg-red-400 hover:bg-red-200 text-white font-bold py-2 px-4 rounded">Видалити</button>
+            </td>
+        </tr>
     )
 }
 export default DiscountItem;

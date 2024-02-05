@@ -9,11 +9,9 @@ import heartIcon from '../../assets/icons/heart.png';
 import CartIcon from "../../components/main-shop/CartIcon";
 import menuIcon from "../../assets/icons/menu.png";
 import CustomModal from "../../components/UI/CustomModal";
-import { fetchProductSuccess } from "../../store/slices/product.slice";
 import './MainHeader.sass'
 const MainHeader: React.FC = () => {
     const [isVisible, setIsVisible] = useState<boolean>(true);
-    const urlApi = import.meta.env.REACT_APP_API_URL;
 
     useEffect(() => {   
       const handleScroll = () => {
@@ -31,18 +29,12 @@ const MainHeader: React.FC = () => {
         window.removeEventListener('scroll', handleScroll);
       };
     }, []);
-    const user = useAppSelector((state) => state.userSlice.user);
+    const user = useAppSelector((state:any) => state.userSlice.user);
     const dispatch = useAppDispatch();
     const headerClass = isVisible ? 'header' : 'header hidden';
     const [isOpen, setIsOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
-    const getNewProducts = () => {
-        fetch(urlApi + '/products/newProducts')
-            .then((res) => res.json())
-            .then((res) => {
-                dispatch(fetchProductSuccess(res))
-            })
-    }
+
     return (
         <header className={headerClass}>
             {isSearchOpen && <CustomModal isSearchOpen={isSearchOpen} setIsSearchOpen={setIsSearchOpen} />}
@@ -56,13 +48,19 @@ const MainHeader: React.FC = () => {
             </div>
 
             <h1 className="logo"><Link to="/">Step In Style</Link></h1>
-            <nav className="">
-                <LinkNavMenu to="/" popUpChildren={<>He</>}><p onClick={getNewProducts}>Новинки</p></LinkNavMenu>
+            <nav className="flex justify-between">
+                <button className="px-2">Новинки</button>
+                <button className="px-2">Чоловікам</button>
+                <button className="px-2">Жінкам</button>
+                <button className="px-2">Дітям</button>
+                <button className="px-2">Знижки</button>
+                <button className="px-2">Бренди</button>
+                {/* <LinkNavMenu to="/" popUpChildren={<>He</>}><p>Новинки</p></LinkNavMenu>
                 <LinkNavMenu to="/" popUpChildren={<>Hs</>}><p>Чоловікам</p></LinkNavMenu>
                 <LinkNavMenu to="/" popUpChildren={<>Hc</>}><p>Жінкам</p></LinkNavMenu>
                 <LinkNavMenu to="/" popUpChildren={<>Hz</>}><p>Дітям</p></LinkNavMenu>
                 <LinkNavMenu to="/" popUpChildren={<>He</>}><p>Знижки</p></LinkNavMenu>
-                <LinkNavMenu to="/" popUpChildren={<>He</>}><p>Бренди</p></LinkNavMenu>
+                <LinkNavMenu to="/" popUpChildren={<>He</>}><p>Бренди</p></LinkNavMenu> */}
                 {
                     user?.roles?.filter((role: string) => {
                         return role === 'user'
@@ -81,7 +79,7 @@ const MainHeader: React.FC = () => {
             </div>
             <div className={`${isOpen ? "open" : "mobile_menu"} `}>
                 <h2>Мобіла</h2>
-                <NavLink to="/"><p className="text-black" onClick={getNewProducts}>Новинки</p></NavLink>
+                <NavLink to="/"><p className="text-black">Новинки</p></NavLink>
                 {
                     user?.roles?.filter((role: string) => {
                         return role === 'user'

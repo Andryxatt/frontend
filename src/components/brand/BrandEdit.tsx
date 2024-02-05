@@ -1,29 +1,44 @@
-import { useState } from "react";
-import { useUpdateBrandMutation } from "../../api/apiSlice";
-import DashboardLayout from "../../layouts/DashboardLayout";
-import { useParams } from "react-router";
-import { useGetBrandQuery } from "../../api/apiSlice";
-import { ToastContainer, toast } from "react-toastify";
-import CustomInput  from "../UI/CustomInput";
+import React, { useLayoutEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { CustomTextarea } from "../UI/CustomTextarea";
-const BrandEdit = () => {
-    const { id } = useParams<{ id: string }>();
-    const methods = useForm()
-    const [file, setFile] = useState(null) as any;
-    const { data: brand, isSuccess } = useGetBrandQuery(id, { refetchOnMountOrArgChange: true }) as any;
-    const [updateBrand] = useUpdateBrandMutation();
-    const notifySuccess = () => toast("Brand updated!");
+import { useParams } from "react-router";
+import { ToastContainer, toast } from "react-toastify";
 
-    const onFileChange = (fileChangeEvent: any) => {
-        setFile(fileChangeEvent.target.files[0]);
-    }
+import DashboardLayout from "../../layouts/DashboardLayout";
+import CustomInput  from "../UI/CustomInput";
+import { CustomTextarea } from "../UI/CustomTextarea";
+
+import { useGetBrandQuery, useUpdateBrandMutation } from "../../api/apiSlice";
+type BrandResponse = {
+    data: any
+    isSuccess: boolean
+}
+
+const BrandEdit: React.FC = () => {
+    const { id } = useParams<{ id: string }>();
+    useLayoutEffect(() => {
+       console.log(id, "id layout effect");
+    }, []);
+    const methods = useForm()
+    const [file, setFile] = useState<File | null>(null);
+    const { data: brand, isSuccess } = useGetBrandQuery<BrandResponse>(id, { 
+        refetchOnMountOrArgChange: true 
+    });
+
+    const [updateBrand] = useUpdateBrandMutation();
+
+    const notifySuccess = () => toast("Бренд оновлено");
+
+    const onFileChange = (fileChangeEvent: React.ChangeEvent<HTMLInputElement>) => {
+        if (fileChangeEvent.target.files && fileChangeEvent.target.files.length > 0) {
+          setFile(fileChangeEvent.target.files[0]);
+        }
+      };
     const onSubmit = methods.handleSubmit((data: any) => {
         const { name, description } = data
         const formData = new FormData();
         formData.append('name', name);
         formData.append('description', description);
-        formData.append('iconPath', brand.iconPath);
+        formData.append('iconPath', brand?.iconPath);
         formData.append('id', brand.id);
         if (file !== null) {
             formData.append('file', file, file.name);
