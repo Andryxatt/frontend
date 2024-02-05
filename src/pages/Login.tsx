@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store/store";
 import { useForm } from 'react-hook-form';
 import MainLayout from "../layouts/MainLayout";
+import axios from "axios";
 type LoginValues = {
     email: string;
     password: string;
@@ -16,13 +17,20 @@ const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<LoginValues>();
     const onSubmit = handleSubmit((data) => {
         console.log(data)
-        http.post("auth/login", data).then((response) => {
+        axios.post('htpps://apistepinstyle.com/api/auth/login', data).then((response) => {
+            console.log(response)
             dispatch(setToken(response.data.token))
             dispatch(setUser(response.data.user))
             history('/');
-        }).catch((error) => {
-            console.log(error)
-        }) 
+        })
+        // http.post("auth/login", data).then((response) => {
+        //     console.log(response)
+        //     dispatch(setToken(response.data.token))
+        //     dispatch(setUser(response.data.user))
+        //     history('/');
+        // }).catch((error) => {
+        //     console.log(error)
+        // }) 
     });
     return (
             <MainLayout>
