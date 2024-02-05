@@ -12,7 +12,6 @@ const ProductList = () => {
   const [search,] = useState('');
   const [limit, setLimit] = useState(1);
   const loadButtonRef = React.useRef<HTMLButtonElement>(null)
-
   const {
     data,
     isLoading,
