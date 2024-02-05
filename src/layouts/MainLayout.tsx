@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import ActiveBar from "../components/main-shop/ActiveBar";
 import MainFooter from "./footers/MainFooter";
 import MainHeader from "./headers/MainHeader";
 import React from "react";

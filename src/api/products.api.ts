@@ -44,22 +44,11 @@ export const productsApi = (builder: any) => ({
         invalidatesTags: ['Products']
     }),
     updateSingleProduct: builder.mutation({
-        query: (updateProduct: any, id:string) => ({
+        query: (updateProduct: any) => ({
             url: `/products/${updateProduct.id}`,
             method: 'PATCH',
             body: updateProduct.data,
         }),
-        onQueryStarted(args: any, { dispatch, queryFulfilled }: any) {
-            try {
-                console.log('queryFulfilled:', queryFulfilled);
-                const { data } = queryFulfilled;
-                console.log('updateProduct data:', data);
-                console.log('updateProduct args:', args);
-            } catch (err) {
-                console.error('Error logging updateProduct:', err);
-            }
-        },
-  
         invalidatesTags: ['Products']
     }),
     

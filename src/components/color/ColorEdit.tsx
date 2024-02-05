@@ -1,12 +1,11 @@
 import DashboardLayout from "../../layouts/DashboardLayout";
 import { useParams } from "react-router";
 import { useGetColorQuery, useUpdateColoresMutation } from "../../api/apiSlice";
-import { ToastContainer, toast } from "react-toastify";
 import CustomInput from "../UI/CustomInput";
 import { FormProvider, useForm } from "react-hook-form";
-import { CustomTextarea } from "../UI/CustomTextarea";
 import { ChromePicker } from "react-color";
 import { useState } from "react";
+import { toast } from "react-toastify";
 const ColorEdit = () => {
     const { id } = useParams<{ id: string }>();
     const methods = useForm()

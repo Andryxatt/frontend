@@ -10,7 +10,7 @@ const CategoryEdit = () => {
     const { id } = useParams<{ id: string }>();
     const methods = useForm()
     const { data: subCategory, isSuccess: isSuccesSubCat } = useGetSubCategoryQuery<any>(id, { refetchOnMountOrArgChange: true }) as any;
-    const { data: categoryies, isSuccess: isSuccesCat } = useGetCategoriesQuery<any>(null, { refetchOnMountOrArgChange: true }) as any;
+    const { data: categoryies} = useGetCategoriesQuery<any>(null, { refetchOnMountOrArgChange: true }) as any;
     const [updateSubCategory] = useUpdateSubCategoryMutation();
     const notifySuccess = () => toast("Категорія оновлена!");
     const onSubmit = methods.handleSubmit((data: any) => {

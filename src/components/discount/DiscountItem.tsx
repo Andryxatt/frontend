@@ -1,14 +1,10 @@
-import { useState } from "react";
-import { useUpdateDiscountsMutation, useDeleteDiscountsMutation} from "../../api/apiSlice";
+import { useDeleteDiscountsMutation} from "../../api/apiSlice";
 import { Discount } from "../../models/discount.model";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 const DiscountItem = ({ discount }: { discount: Discount}) => {
     const notifyDelete = () => toast("Знижку видалено!")
     const [deleteDiscount] = useDeleteDiscountsMutation();
-
-  
-
     return (
         <tr className="border-b dark:border-neutral-500">
             <td className="whitespace-nowrap px-6 py-4 font-medium">{ discount.id }</td>

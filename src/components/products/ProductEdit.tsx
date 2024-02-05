@@ -23,7 +23,6 @@ const ProductEdit = () => {
     const [images, setImages] = useState<any>()
     const { data: product, isLoading: isProductsLoading } = useGetProductByIdQuery<ProductEdit>(id);
     const { data: brands,
-        isLoading: brandsIsLoading,
     } = useGetBrandsQuery(id, { refetchOnMountOrArgChange: true }) as any;
     // Assuming 'id' is a variable that you're passing to the hook
     const { data: categories, isLoading: categoriesIsLoading } = useGetCategoriesQuery(null, { refetchOnMountOrArgChange: true }) as any;
@@ -51,22 +50,8 @@ const ProductEdit = () => {
     }
 
     const onSubmit = methods.handleSubmit((data: any) => {
-        const { name, description, model, status, genderId, seasoneId, brandId, price, curencyPrice, discount } = data
+        const { name, description, model, brandId, price, curencyPrice, discount } = data
         const formData = new FormData();
-        // const updateProductDto ={
-        //     name,
-        //     model,
-        //     brandId: brandId.value,
-        //     price,
-        //     curencyPrice,
-        //     discountId: discount.value,
-        //     description,
-        //     status: "1",
-        //     genderId: "1",
-        //     seasoneId: "1",
-        //     subCategories: JSON.stringify(refSelectCategory.current.state.selectValue.map((value: any) => value.value)),
-        //     sizes: JSON.stringify([...sizesProduct, ...editedSizes.map((size: any) => { return { sizeId: size.size.id, quantity: size.quantity, sizeName: size.size.CM } })])
-        // }
         formData.append('name', name);
         formData.append('model', model);
         formData.append('brandId', brandId.value);

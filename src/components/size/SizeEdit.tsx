@@ -1,6 +1,6 @@
 import DashboardLayout from "../../layouts/DashboardLayout";
 import { useParams } from "react-router";
-import { useGetSizeQuery, useUpdateCategoryMutation, useUpdateSizesMutation } from "../../api/apiSlice";
+import { useGetSizeQuery, useUpdateSizesMutation } from "../../api/apiSlice";
 import { toast } from "react-toastify";
 import  CustomInput  from "../UI/CustomInput";
 import { FormProvider, useForm } from "react-hook-form";

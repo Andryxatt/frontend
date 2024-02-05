@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAppSelector } from "../../store/hooks";
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import LinkNavMenu from "../../components/UI/LinkNavMenu";
@@ -30,7 +30,6 @@ const MainHeader: React.FC = () => {
       };
     }, []);
     const user = useAppSelector((state:any) => state.userSlice.user);
-    const dispatch = useAppDispatch();
     const headerClass = isVisible ? 'header' : 'header hidden';
     const [isOpen, setIsOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);

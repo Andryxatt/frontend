@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
 import { Color } from "../../models/color.model";
-import { useUpdateColoresMutation, useDeleteColoresMutation } from "../../api/apiSlice";
+import { useDeleteColoresMutation } from "../../api/apiSlice";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 const ColorItem = ({ color }: { color: Color }) => {
