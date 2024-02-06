@@ -45,4 +45,12 @@ jobs:
         port: ${{ secrets.VPS_PORT }}
         script: |
           cd /var/www/html/frontend 
+          echo "Current directory contents:"
+          ls -l
+          echo "Running git pull..."
+          git pull
+          echo "Running npm install..."
+          npm install
+          echo "Running npm run build..."
+          npm run build
           
