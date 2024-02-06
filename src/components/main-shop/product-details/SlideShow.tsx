@@ -49,8 +49,8 @@ const SlideShow = ({ images }: any) => {
             <div className="relative">
                 <img className={`${style.imgAnimation} w-[36em]`} src={`${import.meta.env.VITE_API_URL}${currentImage.imagePath}`} alt="Sunset in the mountains" />
                 <IconContext.Provider value={{ size: '40px' }}>
-                    <button className="absolute top-[30px] w-[40px] right-2 p-2 rounded-md bg-gray-800 bg-opacity-30" onClick={prevImage}><FaChevronRight /></button>
-                    <button className="absolute right-0 top-[50px] w-[40px] left-2 p-2 rounded-md bg-gray-800 bg-opacity-30" onClick={nextImage}><FaChevronLeft /></button>
+                    <button className="absolute top-[30px] w-[40px] right-2 p-2 rounded-md bg-gray-400 bg-opacity-30" onClick={prevImage}><FaChevronRight /></button>
+                    <button className="absolute right-0 top-[50px] w-[40px] left-2 p-2 rounded-md bg-gray-400 bg-opacity-30" onClick={nextImage}><FaChevronLeft /></button>
                 </IconContext.Provider>
             </div>
         </div>
