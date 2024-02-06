@@ -44,6 +44,5 @@ jobs:
         key: ${{ secrets.VPS_PRIVATE_KEY }}
         port: ${{ secrets.VPS_PORT }}
         script: |
-          git pull
-          npm install
-          npm run build
+          cd /var/www/html/frontend 
+          
