@@ -9,6 +9,7 @@ import { loadMoreProduct } from "../../store/slices/blacklist.slice";
 import { BsFillGrid3X3GapFill, BsFillGridFill } from "react-icons/bs";
 import MainLayout from "../../layouts/MainLayout";
 import ActiveBar from "./ActiveBar";
+import styles from "./Products.module.sass";
 const Products = () => {
   const products = useAppSelector((state) => state.productSlice.products);
   const limit = useAppSelector((state) => state.blackListSlice.limit);
@@ -17,10 +18,14 @@ const Products = () => {
   const [gridSize, setGridSize] = useState(3);
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    const products = fetchProducts({ page: 1, limit: 10, search, filters: JSON.stringify(filters) });
+    const activeFilters = filters.map((filter:any) => ({
+      name: filter.name,
+      elements: filter.elements.filter(({ status }: any) => status)
+    }));
+    const products = fetchProducts({ page: 1, limit: 10, search, filters: JSON.stringify(activeFilters) });
     dispatch(products);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [limit, filters]);
+  }, [limit, filters, search]);
   const loadMore = () => {
     dispatch(loadMoreProduct(limit + 10));
   }
@@ -35,14 +40,16 @@ const Products = () => {
 
       </div>
       <hr className="mb-4" />
-      <div className="flex flex-row">
-        <div className={`sm:flex flex-wrap md:grid ${gridSize === 3 ? 'grid-cols-3' : 'grid-cols-4'}`}>
+        <div className={`${styles.productsWrapper} ${gridSize === 3 ? styles.gridCol3 : styles.gridCol4}`}>
           {
-            products?.map((product: Product) => <SingleProduct key={product.id} product={product} />)
+          products?.length > 0 ? products?.map((product: Product) => <SingleProduct key={product.id} product={product} />) : <h1>Не знайдено товарів за заданними критеріями!</h1>
           }
+          <div className={`${gridSize === 3 ? styles.gridItem3 : styles.gridItem4}`}>
+            <ActiveBar />
+          </div>
+           
         </div>
-        <ActiveBar />
-      </div>
+    
 
       <button onClick={() => { loadMore() }}>Load More</button>
     </MainLayout>
