@@ -1,19 +1,18 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import styles from './CustomModal.module.sass';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../store/store';
-import { useAppSelector } from '../../store/hooks';
-import { fetchProducts } from '../../store/slices/product.slice';
 import { setSearch } from '../../store/slices/blacklist.slice';
+import { useAppSelector } from '../../store/hooks';
 type CustomModalProps = {
     setIsSearchOpen: (isOpen: boolean) => void;
     isSearchOpen: boolean;
   };
 const CustomModal: React.FC<CustomModalProps> = ({ setIsSearchOpen, isSearchOpen }) =>  {
     const [inputValue, setInputValue] = useState('');
+    const searchValue = useAppSelector((state) => state.blackListSlice.search); 
     const inputRef = useRef<HTMLInputElement>(null);
-    const limit = useAppSelector((state) => state.blackListSlice.limit);
-    const filters = useAppSelector((state) => state.blackListSlice.filters);
+
     const dispatch = useDispatch<AppDispatch>();
     // Function to handle clicks outside the input element
     const handleClickOutside = (event: MouseEvent) => {
@@ -22,17 +21,10 @@ const CustomModal: React.FC<CustomModalProps> = ({ setIsSearchOpen, isSearchOpen
             setIsSearchOpen(false);
         }
     };
-    const searchProducts = async (search: string) => {
-        console.log('search', search);
-        console.log('filters', filters);
-        const params = { page: 1, limit: limit, search, filters: JSON.stringify(filters)};
-        await dispatch(fetchProducts(params));
-    }
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const newVal = e.target.value;
         setInputValue(newVal);
         dispatch(setSearch(newVal));
-        searchProducts(newVal);
     };
     const handleBlur = () => {
         setInputValue('');
@@ -43,7 +35,6 @@ const CustomModal: React.FC<CustomModalProps> = ({ setIsSearchOpen, isSearchOpen
         } else {
             document.removeEventListener('mousedown', handleClickOutside);
         }
-
         // Cleanup the event listener on component unmount
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
@@ -55,7 +46,7 @@ const CustomModal: React.FC<CustomModalProps> = ({ setIsSearchOpen, isSearchOpen
             <div className={`${isSearchOpen ? styles.darkBG : ""} ${styles.bgWrapper}`} onClick={() => setIsSearchOpen(false)} />
             <div className={styles.modal}>
                 <form className={styles.form}>
-                    <input ref={inputRef} onBlur={handleBlur} value={inputValue} type="text" onChange={handleChange} placeholder="Search.." />
+                    <input ref={inputRef} onBlur={handleBlur} value={searchValue} type="text" onChange={handleChange} placeholder="Search.." />
                     <button type="button">Знайти</button>
                 </form>
             </div>

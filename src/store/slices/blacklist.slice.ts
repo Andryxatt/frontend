@@ -6,13 +6,15 @@ interface ProductFilters {
   search?: string;
   isActive?: boolean;
   filters?: any;
+  isLoaded?: boolean;
 }
 const initialState: ProductFilters = {
   page: 1,
   limit: 10,
   search: '',
   isActive: false,
-  filters: []
+  filters: [],
+  isLoaded: false,
 };
 
 export const blackListSlice = createSlice({
@@ -20,8 +22,15 @@ export const blackListSlice = createSlice({
   initialState,
   reducers: {
     loadMoreProduct(state, action: PayloadAction<number>) {
-      console.log(action.payload);
       state.limit = action.payload;
+    },
+    clearFilters(state) {
+      state.search = ' ';
+      state.filters.forEach((filter:any) => {
+        filter.elements.forEach((element:any) => {
+          element.status = false;
+        });
+      });
     },
     setSearch(state, action: PayloadAction<string>) {
       state.search = action.payload;
@@ -29,34 +38,25 @@ export const blackListSlice = createSlice({
     setActiveFilters(state, action: PayloadAction<boolean>) {
       state.isActive = action.payload;
     },
-    setFilters(state, action: PayloadAction<{ filterName: string; element: any }>) {
+    setFilter(state, action: PayloadAction<{ filterName: string; element: any }>) {
       const { filterName, element } = action.payload;
-
-      // Find the index of the existing filter with the same name
-      const existingFilterIndex = state.filters.findIndex((filter: any) => filter.name === filterName);
-
-      // If the filter exists, update it; otherwise, add a new filter
-      if (existingFilterIndex !== -1) {
-        state.filters[existingFilterIndex].elements = state.filters[existingFilterIndex].elements.filter(
-          (item: any) => item.id !== element.id
-        );
-        if (element.status) {
-          state.filters[existingFilterIndex].elements.push(element);
+      const filterIndex = state.filters.findIndex((filter:any) => filter.name === filterName);
+      if (filterIndex !== -1) {
+        const elementIndex = state.filters[filterIndex].elements.findIndex((e:any) => e.id.toString() === element.id);
+        if (elementIndex !== -1) {
+          state.filters[filterIndex].elements[elementIndex].status = element.status;
         }
-        if (state.filters[existingFilterIndex].elements.length === 0) {
-          state.filters.splice(existingFilterIndex, 1);
-        }
-      } else {
-        // If the filter doesn't exist, add a new filter
-        state.filters.push({ name: filterName, elements: [element] });
       }
     },
-
+    loadInitialData: (state, action: PayloadAction<any>) => {
+      state.filters = action.payload;
+      state.isLoaded = true;
+    },
     resetState: () => initialState,
   }
 });
 
-export const { loadMoreProduct, resetState, setActiveFilters, setFilters, setSearch } =
+export const { loadMoreProduct, resetState, setActiveFilters, setFilter, setSearch,loadInitialData, clearFilters } =
   blackListSlice.actions;
 export default blackListSlice.reducer;
 
