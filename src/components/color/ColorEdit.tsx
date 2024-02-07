@@ -18,10 +18,8 @@ const ColorEdit = () => {
     };
     const onSubmit = methods.handleSubmit((data: any) => {
         const { name } = data
-        const formData = new FormData();
-        formData.append('name', name);
         try {
-            updateColor({ id: color.id, formData }).unwrap();
+            updateColor({ id: color.id, name, hexColor: colorNew }).unwrap();
             notifySuccess();
         } catch (error) {
             console.log(error);
