@@ -1,14 +1,17 @@
 import { Product } from "../../models/product.model";
 import { useNavigate } from "react-router-dom";
-import {IoMdHeartEmpty, IoMdHeart } from "react-icons/io"
+import {IoMdHeartEmpty } from "@react-icons/all-files/io/IoMdHeartEmpty"
+import {IoMdHeart } from "@react-icons/all-files/io/IoMdHeart"
 import {likeProduct} from "../../store/slices/product.slice";
-import { useAppSelector, useAppDispatch } from "../../store/hooks";
+import { useAppSelector } from "../../store/hooks";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store/store";
 const priceInUAH = (price: number) => {
     return `${Math.round(Math.ceil(price * 38) / 50) * 60} UAH`;
 }
 
 const SingleProduct = ({ product }: any) => {
-    const dispatch = useAppDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const likedProducts = useAppSelector((state) => state.productSlice.likedProducts);
 
     const isLiked = likedProducts.some(likedProduct => likedProduct?.id === product.id) ? true : false;
@@ -16,7 +19,7 @@ const SingleProduct = ({ product }: any) => {
         event.stopPropagation();
         event.preventDefault();
         if (isLiked) {
-          dispatch(likeProduct(likedProducts.filter((likedProduct: any) => likedProduct.id !== product.id)));
+          dispatch(likeProduct(likedProducts.filter((likedProduct: any) => likedProduct?.id !== product.id)));
         } else {
           dispatch(likeProduct([...likedProducts, product]));
         }
@@ -28,9 +31,7 @@ const SingleProduct = ({ product }: any) => {
     }
     return (
         <div className="rounded overflow-hidden shadow-lg relative">
-            <div className="cursor-pointer" onClick={(e)=>{
-                e.stopPropagation()
-                e.preventDefault()
+            <div className="cursor-pointer" onClick={()=>{
                 showProductDetails(product)
                 }}>
                 <img src={`${import.meta.env.VITE_API_URL}${product?.images[0]?.imagePath}`} alt="Sunset in the mountains" >
