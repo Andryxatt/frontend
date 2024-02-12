@@ -9,21 +9,27 @@ $card-width: 240px
 .gridControlls
       display: flex
       flex-direction: row
-      @media screen and (max-width: 1040px)
+@media screen and (max-width: 1040px)
+      .gridControlls
             display: none
 .gridCol3
       grid-template-columns: repeat(auto-fill, minmax($card-width, calc(33.33% - 1em)))
-      @media screen and (max-width: 768px)
-            grid-template-columns: repeat(auto-fill, minmax($card-width, calc(50% - 1em)))
-      @media screen and (max-width: 480px)
+@media screen and (max-width: 768px)
+      .gridCol3
+            -template-columns: repeat(auto-fill, minmax($card-width, calc(50% - 1em)))
+@media screen and (max-width: 480px)
+      .gridCol3
             grid-template-columns: repeat(auto-fill, minmax(100%, calc(100% - 1em)))
 .gridCol4
       grid-template-columns: repeat(auto-fill, minmax($card-width, calc(25% - 1em)))
-      @media screen and (max-width: 1040px)
+@media screen and (max-width: 1040px)
+      .gridCol4
             grid-template-columns: repeat(auto-fill, minmax($card-width, calc(33.33% - 1em)))
-      @media screen and (max-width: 768px)
+@media screen and (max-width: 768px)
+      .gridCol4
             grid-template-columns: repeat(auto-fill, minmax($card-width, calc(50% - 1em)))
-      @media screen and (max-width: 480px)
+@media screen and (max-width: 480px)
+      .gridCol4
             grid-template-columns: repeat(auto-fill, minmax(100%, calc(100% - 1em)))
 
 .toggleFiltersButton

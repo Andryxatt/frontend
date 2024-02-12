@@ -15,13 +15,13 @@ const Products = () => {
   const limit = useAppSelector((state) => state.blackListSlice.limit);
   const filters = useAppSelector((state) => state.blackListSlice.filters);
   const search = useAppSelector((state) => state.blackListSlice.search);
-
+  const dispatch = useDispatch<AppDispatch>();
   const [gridSize, setGridSize] = useState(3);
   const [showFilters, setShowFilters] = useState(false);
   const toggleFilters = () => {
     setShowFilters(!showFilters);
   };
-  const dispatch = useDispatch<AppDispatch>();
+  
   useEffect(() => {
     const activeFilters = filters.map((filter: any) => ({
       name: filter.name,
