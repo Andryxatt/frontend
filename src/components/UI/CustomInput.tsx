@@ -35,7 +35,6 @@ const CustomInput = ({label, type, id, placeholder, validation, value}:any) => {
     
 }
 export default CustomInput;
-// eslint-disable-next-line no-empty-pattern
 type InputErrorProps = {
   message: string;
 };
