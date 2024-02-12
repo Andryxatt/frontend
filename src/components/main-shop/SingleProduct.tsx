@@ -29,15 +29,15 @@ const SingleProduct = ({ product }: any) => {
         navigate(`/products/${product.id}`);
     }
     return (
-        <div className="rounded overflow-hidden shadow-lg relative">
-            <div className="cursor-pointer" onClick={(e)=>{
+        <div className="rounded overflow-hidden shadow-lg ">
+            <div className="cursor-pointer relative" onClick={(e)=>{
                 showProductDetails(product)
                 }}>
-                <img src={`${import.meta.env.VITE_API_URL}${product?.images[0]?.imagePath}`} alt="Sunset in the mountains" >
-                </img>
+                <img src={`${import.meta.env.VITE_API_URL}${product?.images[0]?.imagePath}`} alt="Sunset in the mountains" />
+                
                     <span className="absolute top-2 left-2">{product?.status}</span>
                     <button onClick={toggleLike} className="absolute right-2 top-2 cursor-pointer">
-                    {!isLiked ? <IoMdHeartEmpty/> : <IoMdHeart/>}
+                    {!isLiked ? <IoMdHeartEmpty size="24px"/> : <IoMdHeart size="24px"/>}
                     </button>
                 <div className="px-6 py-4">
                     <div className="font-bold text-xl mb-2">{product?.name}</div>
