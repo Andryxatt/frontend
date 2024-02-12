@@ -14,12 +14,12 @@ const SingleProduct = ({ product }: any) => {
     const dispatch = useDispatch<AppDispatch>();
     const likedProducts = useAppSelector((state) => state.productSlice.likedProducts);
 
-    const isLiked = likedProducts.some(likedProduct => likedProduct?.id === product.id) ? true : false;
+    const isLiked = likedProducts?.some(likedProduct => likedProduct?.id === product.id) ? true : false;
     const toggleLike = (event: any) => {
         event.stopPropagation();
         event.preventDefault();
         if (isLiked) {
-          dispatch(likeProduct(likedProducts.filter((likedProduct: any) => likedProduct?.id !== product.id)));
+          dispatch(likeProduct(likedProducts?.filter((likedProduct: any) => likedProduct?.id !== product.id)));
         } else {
           dispatch(likeProduct([...likedProducts, product]));
         }
