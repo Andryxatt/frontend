@@ -7,10 +7,7 @@ import { useDispatch } from "react-redux";
 import ActiveBarFilter from "./ActiveBarFilter";
 import { useEffect } from "react";
 import styles from './ActiveBar.module.sass';
-type Filter = {
-    data: any[],
-    isSucces: boolean
-}
+
 const ActiveBar = ({ toggleFilters, showFilters }: any) => {
     const dispatch = useDispatch<AppDispatch>();
     const {
