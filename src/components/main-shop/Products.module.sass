@@ -1,16 +1,52 @@
+// .productsWrapper
+//       display: grid
+//       grid-gap: 1em
+//       width: 100%
+// .gridCol3
+//       grid-template-columns: repeat(auto-fill, minmax(240px, calc(33.33% - 1em)))
+//       @media screen and (max-width: 768px)
+//             grid-template-columns: repeat(auto-fill, minmax(240px, calc(50% - 1em)))
+//       @media screen and (max-width: 480px)
+//             grid-template-columns: repeat(auto-fill, minmax(240px, calc(100% - 1em)))
+// .gridCol4
+//       grid-template-columns: repeat(auto-fill, minmax(240px, calc(25% - 1em)))
+//       @media screen and (max-width: 768px)
+//             grid-template-columns: repeat(auto-fill, minmax(240px, calc(50% - 1em)))
+//       @media screen and (max-width: 480px)
+//             grid-template-columns: repeat(auto-fill, minmax(240px, calc(100% - 1em)))
+$card-width: 240px
+.wrapper
+      display: flex
+      position: relative
 .productsWrapper
       display: grid
+      grid-gap: 1em
+      width: 100%
+.gridControlls
+      display: flex
+      flex-direction: row
+      @media screen and (max-width: 1040px)
+            display: none
 .gridCol3
-      grid-template-columns: 1fr 1fr 1fr 1fr
-      grid-gap: 1rem
-
+      grid-template-columns: repeat(auto-fill, minmax($card-width, calc(33.33% - 1em)))
+      @media screen and (max-width: 768px)
+            grid-template-columns: repeat(auto-fill, minmax($card-width, calc(50% - 1em)))
+      @media screen and (max-width: 480px)
+            grid-template-columns: repeat(auto-fill, minmax(100%, calc(100% - 1em)))
 .gridCol4
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr
-      grid-gap: 1rem
-.gridItem3
-      grid-column-start: 5
-      grid-row: 1 / span 9999
-      
-.gridItem4
-      grid-column-start: 6
-      grid-row: 1 / span 9999
+      grid-template-columns: repeat(auto-fill, minmax($card-width, calc(25% - 1em)))
+      @media screen and (max-width: 1040px)
+            grid-template-columns: repeat(auto-fill, minmax($card-width, calc(33.33% - 1em)))
+      @media screen and (max-width: 768px)
+            grid-template-columns: repeat(auto-fill, minmax($card-width, calc(50% - 1em)))
+      @media screen and (max-width: 480px)
+            grid-template-columns: repeat(auto-fill, minmax(100%, calc(100% - 1em)))
+
+.toggleFiltersButton
+      position: absolute
+      right: 60px
+      top: -42px
+      display: block
+      z-index: 1
+            
+     

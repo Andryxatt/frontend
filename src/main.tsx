@@ -34,6 +34,7 @@ import FeatureEdit from './components/feature/FeatureEdit.tsx';
 import GenderEdit from './components/gender/GenderEdit.tsx';
 import SeasoneEdit from './components/seasone/SeasoneEdit.tsx';
 import LoadDataWithFile from './components/products/LoadDataWithFile.tsx';
+import LikedProducts from './components/main-shop/LikedProducts.tsx';
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
@@ -69,6 +70,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <Route path="/products/:id" element={<ProductDetails/>} />
           <Route path="/dashboard/products/:id" element={<ProductEdit/>} />
           <Route path="/acount" element={<AccountInformation/>} />
+          <Route path="/liked" element={<LikedProducts/>} />
         </Routes>
       </BrowserRouter>
     </PersistGate>

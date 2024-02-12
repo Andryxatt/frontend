@@ -1,17 +1,17 @@
 import { useGetBrandsQuery, useGetCategoriesQuery } from "../../api/apiSlice";
-import { setActiveFilters, clearFilters, loadInitialData} from '../../store/slices/blacklist.slice';
-import style from './ActiveBar.module.sass';
+import { setActiveFilters, clearFilters, loadInitialData } from '../../store/slices/blacklist.slice';
 import { FaXmark } from "react-icons/fa6";
 import { useAppSelector } from "../../store/hooks";
 import { AppDispatch } from "../../store/store";
 import { useDispatch } from "react-redux";
 import ActiveBarFilter from "./ActiveBarFilter";
 import { useEffect } from "react";
+import styles from './ActiveBar.module.sass';
 type Filter = {
     data: any[],
     isSucces: boolean
 }
-const ActiveBar = () => {
+const ActiveBar = ({ toggleFilters, showFilters }: any) => {
     const dispatch = useDispatch<AppDispatch>();
     const {
         data: brands,
@@ -36,30 +36,35 @@ const ActiveBar = () => {
         if (isBrandsLoaded && isCategoriesLoaded) {
             const br = prepareFilters(brands, 'brand');
             const cat = prepareFilters(categories, 'subCategories');
-           dispatch(loadInitialData([{name: 'brand', elements:br},{ name: 'subCategories', elements: cat}]))
+            dispatch(loadInitialData([{ name: 'brand', elements: br }, { name: 'subCategories', elements: cat }]))
         }
-      
-        
-    }, [isBrandsLoaded, isCategoriesLoaded])
-    const {filters, isLoaded} = useAppSelector((state) => state.blackListSlice);
 
+
+    }, [isBrandsLoaded, isCategoriesLoaded])
+    const { filters, isLoaded } = useAppSelector((state) => state.blackListSlice);
     const isActiveFilter = useAppSelector((state) => state.blackListSlice.isActive);
+    const applayFilters = () => {
+        toggleFilters()
+    }
     return (
-        <div className={style.activeBarWrapper}>
+        <div className={`${styles.activeBarWrapper} ${showFilters ? '' : styles.hide}`}>
             <div className="flex flex-row justify-between">
-                <button onClick={()=>dispatch(clearFilters())} className={style.activeBarButton}>Очистити</button>
+                <button onClick={() => dispatch(clearFilters())} className={styles.activeBarButton}>Очистити</button>
                 <span>Фільтри</span>
-                <button onClick={() => dispatch(setActiveFilters(!isActiveFilter))}><FaXmark /></button>
+                <button onClick={() => {
+                    dispatch(setActiveFilters(!isActiveFilter))
+                    toggleFilters()
+                }}><FaXmark /></button>
             </div>
             <div>
                 <h3>Бренди</h3>
-              <ActiveBarFilter elements={filters} isLoaded={isLoaded!} filterName="brand"/>
+                <ActiveBarFilter elements={filters} isLoaded={isLoaded!} filterName="brand" />
             </div>
             <div>
                 <h3>Категорії</h3>
-                <ActiveBarFilter elements={filters} isLoaded={isLoaded!} filterName="subCategories"/>
+                <ActiveBarFilter elements={filters} isLoaded={isLoaded!} filterName="subCategories" />
             </div>
-            <button>Застосувати</button>
+            <button onClick={applayFilters}>Застосувати</button>
         </div>
     )
 }

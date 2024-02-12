@@ -38,8 +38,8 @@ const SlideShow = ({ images }: any) => {
         setCurrentImageIndex(0);
     }, [images]);
     return (
-        <div className="flex flex-row">
-            <div className="flex flex-col mr-4">
+        <div className="flex md:flex-row sm:flex-col">
+            <div className="flex sm:flex-col mr-4">
                 {images?.map((image: any, index: number) => (
                     <div className={`${currentImageIndex === index ? " border-black" : "transition-border duration-300 border-b-[1px] border-transparent"} w-full mb-2 border-b-[1px]`} key={index}>
                         <img onMouseOver={() => changeImage(image, index)} className="w-[5em] transition-opacity duration-300 hover:opacity-75" src={`${import.meta.env.VITE_API_URL}${image.imagePath}`} alt="Sunset in the mountains" />
