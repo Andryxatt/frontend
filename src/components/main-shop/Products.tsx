@@ -8,7 +8,7 @@ import { AppDispatch } from "../../store/store";
 import { loadMoreProduct } from "../../store/slices/blacklist.slice";
 import { BsFillGrid3X3GapFill, BsFillGridFill } from "react-icons/bs";
 import MainLayout from "../../layouts/MainLayout";
-// import ActiveBar from "./ActiveBar";
+import ActiveBar from "./ActiveBar";
 import styles from "./Products.module.sass";
 const Products = () => {
   const products = useAppSelector((state) => state.productSlice.products);
@@ -17,17 +17,17 @@ const Products = () => {
   const search = useAppSelector((state) => state.blackListSlice.search);
 
   const [gridSize, setGridSize] = useState(3);
-  // const [showFilters, setShowFilters] = useState(false);
-  // const toggleFilters = () => {
-  //   setShowFilters(!showFilters);
-  // };
+  const [showFilters, setShowFilters] = useState(false);
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
+  };
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     const activeFilters = filters.map((filter: any) => ({
       name: filter.name,
       elements: filter.elements.filter(({ status }: any) => status)
     }));
-    const products = fetchProducts({ page: 1, limit: 10, search, filters: JSON.stringify(activeFilters) });
+    const products = fetchProducts({ page: 1, limit: 10, search, filters: JSON.stringify(activeFilters ?? '[]') });
     dispatch(products);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [limit, filters, search]);
@@ -51,10 +51,10 @@ const Products = () => {
             products?.length > 0 ? products?.map((product: Product) => <SingleProduct key={product.id} product={product} />) : <h1>Не знайдено товарів за заданними критеріями!</h1>
           }
         </div>
-        {/* <ActiveBar toggleFilters={toggleFilters} showFilters={showFilters} />
+        <ActiveBar toggleFilters={toggleFilters} showFilters={showFilters} />
         <button onClick={toggleFilters} className={styles.toggleFiltersButton}>
           Фільтри
-        </button> */}
+        </button>
       </div>
       <button onClick={() => { loadMore() }}>Load More</button>
     </MainLayout>
