@@ -16,11 +16,11 @@ const ActiveBar = ({ toggleFilters, showFilters }: any) => {
     const {
         data: brands,
         isSuccess: isBrandsLoaded,
-    } = useGetBrandsQuery<Filter>(undefined, { refetchOnMountOrArgChange: true }) as any
+    } = useGetBrandsQuery<any>(undefined, { refetchOnMountOrArgChange: true }) as any
     const {
         data: categories,
         isSuccess: isCategoriesLoaded,
-    } = useGetCategoriesQuery<Filter>(undefined, { refetchOnMountOrArgChange: true }) as any;
+    } = useGetCategoriesQuery<any>(undefined, { refetchOnMountOrArgChange: true }) as any;
 
     const prepareFilters = (elements: any[], filterName: string) => {
         return elements?.map((item: any) => {
@@ -38,8 +38,6 @@ const ActiveBar = ({ toggleFilters, showFilters }: any) => {
             const cat = prepareFilters(categories, 'subCategories');
             dispatch(loadInitialData([{ name: 'brand', elements: br }, { name: 'subCategories', elements: cat }]))
         }
-
-
     }, [isBrandsLoaded, isCategoriesLoaded])
     const { filters, isLoaded } = useAppSelector((state) => state.blackListSlice);
     const isActiveFilter = useAppSelector((state) => state.blackListSlice.isActive);
