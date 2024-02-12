@@ -51,7 +51,7 @@ export const productSlice = createSlice({
       const selectedProduct = state.products.find((product) => product.id === action.payload);
       state.selectedProduct = selectedProduct || null;
     },
-    likeProduct(state, action: PayloadAction<any[]>){
+    likeProduct(state, action: PayloadAction<any>){
       state.likedProducts = action.payload
     }
   },
