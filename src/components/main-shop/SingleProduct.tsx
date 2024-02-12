@@ -2,15 +2,13 @@ import { Product } from "../../models/product.model";
 import { useNavigate } from "react-router-dom";
 import {IoMdHeartEmpty, IoMdHeart } from "react-icons/io"
 import {likeProduct} from "../../store/slices/product.slice";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store/store";
-import { useAppSelector } from "../../store/hooks";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
 const priceInUAH = (price: number) => {
     return `${Math.round(Math.ceil(price * 38) / 50) * 60} UAH`;
 }
 
 const SingleProduct = ({ product }: any) => {
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
     const likedProducts = useAppSelector((state) => state.productSlice.likedProducts);
 
     const isLiked = likedProducts.some(likedProduct => likedProduct?.id === product.id) ? true : false;
