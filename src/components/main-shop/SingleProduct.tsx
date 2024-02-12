@@ -13,19 +13,16 @@ const priceInUAH = (price: number) => {
 const SingleProduct = ({ product }: any) => {
     const dispatch = useDispatch<AppDispatch>();
     const likedProducts = useAppSelector((state) => state.productSlice.likedProducts);
-    const isLiked = likedProducts.some(likedProduct => likedProduct.id === product.id);
+    const isLiked = likedProducts.some(likedProduct => likedProduct?.id === product.id);
     const toggleLike = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.stopPropagation();
+        event.preventDefault();
         if (isLiked) {
           dispatch(likeProduct(likedProducts.filter((likedProduct: any) => likedProduct.id !== product.id)));
         } else {
           dispatch(likeProduct([...likedProducts, product]));
         }
       };
-
-  useEffect(() => {
-    localStorage.setItem('likedProducts', JSON.stringify(likedProducts));
-  }, [likedProducts]);
 
     const navigate = useNavigate();
     const showProductDetails = (product: Product) => {
