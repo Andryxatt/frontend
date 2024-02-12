@@ -31,7 +31,9 @@ const SingleProduct = ({ product }: any) => {
     }
     return (
         <div className="rounded overflow-hidden shadow-lg relative">
-            <div className="cursor-pointer" onClick={()=>{
+            <div className="cursor-pointer" onClick={(e)=>{
+                   e.stopPropagation();
+                   e.preventDefault();
                 showProductDetails(product)
                 }}>
                 <img src={`${import.meta.env.VITE_API_URL}${product?.images[0]?.imagePath}`} alt="Sunset in the mountains" >
