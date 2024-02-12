@@ -1,7 +1,7 @@
 import { Product } from "../../models/product.model";
 import { useNavigate } from "react-router-dom";
 import {IoMdHeartEmpty, IoMdHeart } from "react-icons/io"
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {likeProduct} from "../../store/slices/product.slice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
