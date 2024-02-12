@@ -28,7 +28,8 @@ const Products = () => {
       elements: filter.elements.filter(({ status }: any) => status)
     }));
     const products = fetchProducts({ page: 1, limit: 10, search, filters: JSON.stringify(activeFilters ?? '[]') });
-    dispatch(products);
+    console.log(products);
+    // dispatch(products);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [limit, filters, search]);
   const loadMore = () => {
