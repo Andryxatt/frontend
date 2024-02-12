@@ -8,7 +8,7 @@ type MainLayoutProps = {
 const MainLayout: React.FC<MainLayoutProps> =  React.memo(({ children }) => {
 // 
     return (
-        <div className="h-[100%]">
+        <div className="h-">
             <MainHeader />
             <div className="mt-[5em]">
                 {children}

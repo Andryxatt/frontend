@@ -15,10 +15,15 @@ const Products = () => {
   const limit = useAppSelector((state) => state.blackListSlice.limit);
   const filters = useAppSelector((state) => state.blackListSlice.filters);
   const search = useAppSelector((state) => state.blackListSlice.search);
+
   const [gridSize, setGridSize] = useState(3);
+  const [showFilters, setShowFilters] = useState(false);
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
+  };
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    const activeFilters = filters.map((filter:any) => ({
+    const activeFilters = filters.map((filter: any) => ({
       name: filter.name,
       elements: filter.elements.filter(({ status }: any) => status)
     }));
@@ -29,28 +34,28 @@ const Products = () => {
   const loadMore = () => {
     dispatch(loadMoreProduct(limit + 10));
   }
+  
   return (
     <MainLayout>
       <div className="flex flex-row justify-between items-center">
         <span> {products?.length} Товарів </span>
-        <div className="flex flex-row items-center justify-between">
+        <div className={styles.gridControlls}>
           <button onClick={() => setGridSize(3)} className="pr-2"><BsFillGrid3X3GapFill /></button>
           <button onClick={() => setGridSize(4)} className="pr-2"><BsFillGridFill /></button>
         </div>
-
       </div>
       <hr className="mb-4" />
+      <div className={styles.wrapper}>
         <div className={`${styles.productsWrapper} ${gridSize === 3 ? styles.gridCol3 : styles.gridCol4}`}>
           {
-          products?.length > 0 ? products?.map((product: Product) => <SingleProduct key={product.id} product={product} />) : <h1>Не знайдено товарів за заданними критеріями!</h1>
+            products?.length > 0 ? products?.map((product: Product) => <SingleProduct key={product.id} product={product} />) : <h1>Не знайдено товарів за заданними критеріями!</h1>
           }
-          <div className={`${gridSize === 3 ? styles.gridItem3 : styles.gridItem4}`}>
-            <ActiveBar />
-          </div>
-           
         </div>
-    
-
+        <ActiveBar toggleFilters={toggleFilters} showFilters={showFilters} />
+        <button onClick={toggleFilters} className={styles.toggleFiltersButton}>
+          Фільтри
+        </button>
+      </div>
       <button onClick={() => { loadMore() }}>Load More</button>
     </MainLayout>
   );

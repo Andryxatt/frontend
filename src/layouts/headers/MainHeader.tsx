@@ -11,8 +11,8 @@ import menuIcon from "../../assets/icons/menu.png";
 import CustomModal from "../../components/UI/CustomModal";
 import './MainHeader.sass'
 const MainHeader: React.FC = () => {
+    const likedProducts = useAppSelector((state) => state.productSlice.likedProducts);
     const [isVisible, setIsVisible] = useState<boolean>(true);
-
     useEffect(() => {   
       const handleScroll = () => {
         const scrollY = window.scrollY;
@@ -33,7 +33,6 @@ const MainHeader: React.FC = () => {
     const headerClass = isVisible ? 'header' : 'header hidden';
     const [isOpen, setIsOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
-
     return (
         <header className={headerClass}>
             {isSearchOpen && <CustomModal isSearchOpen={isSearchOpen} setIsSearchOpen={setIsSearchOpen} />}
@@ -45,7 +44,6 @@ const MainHeader: React.FC = () => {
                     <img className="icon" src={searchIcon} />
                 </button>
             </div>
-
             <h1 className="logo"><Link to="/">Step In Style</Link></h1>
             <nav className="flex justify-between">
                 <button className="px-2">Новинки</button>
@@ -54,12 +52,6 @@ const MainHeader: React.FC = () => {
                 <button className="px-2">Дітям</button>
                 <button className="px-2">Знижки</button>
                 <button className="px-2">Бренди</button>
-                {/* <LinkNavMenu to="/" popUpChildren={<>He</>}><p>Новинки</p></LinkNavMenu>
-                <LinkNavMenu to="/" popUpChildren={<>Hs</>}><p>Чоловікам</p></LinkNavMenu>
-                <LinkNavMenu to="/" popUpChildren={<>Hc</>}><p>Жінкам</p></LinkNavMenu>
-                <LinkNavMenu to="/" popUpChildren={<>Hz</>}><p>Дітям</p></LinkNavMenu>
-                <LinkNavMenu to="/" popUpChildren={<>He</>}><p>Знижки</p></LinkNavMenu>
-                <LinkNavMenu to="/" popUpChildren={<>He</>}><p>Бренди</p></LinkNavMenu> */}
                 {
                     user?.roles?.filter((role: string) => {
                         return role === 'user'
@@ -70,7 +62,7 @@ const MainHeader: React.FC = () => {
                 <li><img onClick={() => setIsSearchOpen(true)} className="icon" src={searchIcon} /></li>
                 <li><img className="icon" src={phoneIcon} /></li>
                 <Link to={`${user.roles ? "/acount" : "/login"}`}><img className="icon" src={userIcon} /></Link>
-                <li><img className="icon" src={heartIcon} /></li>
+                <Link to="/liked" className="relative"><img className="icon" src={heartIcon} />{likedProducts?.length > 0 ? <span className="icon-info">{likedProducts?.length}</span> : ""}</Link>
                 <li><CartIcon /></li>
             </ul>
             <div className="wrapper">

@@ -7,6 +7,7 @@ interface ProductPagination {
   loading: boolean;
   error: string | null;
   selectedProduct: Product | null;
+  likedProducts: Product[];
 }
 const initialState: ProductPagination = {
   products: [],
@@ -14,6 +15,7 @@ const initialState: ProductPagination = {
   error: null,
   total: 0,
   selectedProduct: null,
+  likedProducts: []
 };
 //create thunk to load products from api
 export const fetchProducts = createAsyncThunk<ProductPagination, any>(
@@ -49,6 +51,9 @@ export const productSlice = createSlice({
       const selectedProduct = state.products.find((product) => product.id === action.payload);
       state.selectedProduct = selectedProduct || null;
     },
+    likeProduct(state, action: PayloadAction<any[]>){
+      state.likedProducts = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
@@ -67,8 +72,9 @@ export const productSlice = createSlice({
   }
 });
 
-export const { fetchProductStart, fetchProductSuccess, fetchProductFailure, selectProduct } =
+export const { fetchProductStart, fetchProductSuccess, fetchProductFailure, selectProduct, likeProduct } =
   productSlice.actions;
 export const limitProduct = (state: any) => state.product.limit;
 export default productSlice.reducer;
+
 
