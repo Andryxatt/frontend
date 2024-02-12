@@ -1,5 +1,5 @@
-import { Product } from "../../models/product.model";
-import SingleProduct from "./SingleProduct";
+// import { Product } from "../../models/product.model";
+// import SingleProduct from "./SingleProduct";
 import { useAppSelector } from "../../store/hooks";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -48,9 +48,9 @@ const Products = () => {
       <hr className="mb-4" />
       <div className={styles.wrapper}>
         <div className={`${styles.productsWrapper} ${gridSize === 3 ? styles.gridCol3 : styles.gridCol4}`}>
-          {
+          {/* {
             products?.length > 0 ? products?.map((product: Product) => <SingleProduct key={product.id} product={product} />) : <h1>Не знайдено товарів за заданними критеріями!</h1>
-          }
+          } */}
         </div>
         <ActiveBar toggleFilters={toggleFilters} showFilters={showFilters} />
         <button onClick={toggleFilters} className={styles.toggleFiltersButton}>
