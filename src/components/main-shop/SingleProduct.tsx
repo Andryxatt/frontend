@@ -36,7 +36,7 @@ const SingleProduct = ({ product }: any) => {
                 <img src={`${import.meta.env.VITE_API_URL}${product?.images[0]?.imagePath}`} alt="Sunset in the mountains" />
                 
                     <span className="absolute top-2 left-2">{product?.status}</span>
-                    <button onClick={toggleLike} className="absolute right-2 top-2 cursor-pointer">
+                    <button onTouchStart={toggleLike} onClick={toggleLike} className="absolute right-2 top-2 cursor-pointer">
                     {!isLiked ? <IoMdHeartEmpty size="24px"/> : <IoMdHeart size="24px"/>}
                     </button>
                 <div className="px-6 py-4">
