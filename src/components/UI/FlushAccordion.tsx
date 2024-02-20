@@ -1,9 +1,9 @@
 import AccordionItem from './AccordionItem';
-const FlushAccordion = ({ filters, isLoaded }:any) => {
+const FlushAccordion = ({ filters }:any) => {
   return (
     <div className="divide-y divide-gray-200">
-        <AccordionItem elements={filters} isLoaded={isLoaded} filterName="brand" title="Бренди"/>
-        <AccordionItem elements={filters} isLoaded={isLoaded} filterName="subCategories" title="Категорії"/>
+        <AccordionItem elements={filters} filterName="brand" title="Бренди"/>
+        <AccordionItem elements={filters} filterName="subCategories" title="Категорії"/>
         
     </div>
   );

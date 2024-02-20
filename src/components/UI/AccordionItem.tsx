@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { setFilter } from "../../store/slices/blacklist.slice";
 import { AppDispatch } from "../../store/store";
 
-const AccordionItem = ({ elements, title, isLoaded, filterName }: { elements: any[], title: string, isLoaded: boolean, filterName: string }) => {
+const AccordionItem = ({ elements, title, filterName }: { elements: any[], title: string, filterName: string }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
     const handleAccordionClick = () => {
