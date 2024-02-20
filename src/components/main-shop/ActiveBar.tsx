@@ -36,7 +36,7 @@ const ActiveBar = ({ toggleFilters, showFilters }: any) => {
             dispatch(loadInitialData([{ name: 'brand', elements: br }, { name: 'subCategories', elements: cat }]))
         }
     }, [isBrandsLoaded, isCategoriesLoaded])
-    const { filters, isLoaded } = useAppSelector((state) => state.blackListSlice);
+    const { filters} = useAppSelector((state) => state.blackListSlice);
     const isActiveFilter = useAppSelector((state) => state.blackListSlice.isActive);
     const applayFilters = () => {
         toggleFilters()
@@ -51,7 +51,7 @@ const ActiveBar = ({ toggleFilters, showFilters }: any) => {
                     toggleFilters()
                 }}><FaXmark /></button>
             </div>
-            <FlushAccordion filters={filters} isLoaded={isLoaded}/>
+            <FlushAccordion filters={filters} />
             <button onClick={applayFilters}>Застосувати</button>
         </div>
     )

@@ -1,4 +1,4 @@
-import { Product, ProductOnformation } from "../../models/product.model";
+import { ProductOnformation } from "../../models/product.model";
 import SingleProduct from "./SingleProduct";
 import { useAppSelector } from "../../store/hooks";
 import { useEffect, useState } from "react";
