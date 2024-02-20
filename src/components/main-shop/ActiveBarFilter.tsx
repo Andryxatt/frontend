@@ -3,9 +3,10 @@ import { setFilter } from "../../store/slices/blacklist.slice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
 
-const ActiveBarFilter = ({ elements, filterName,isLoaded }: { elements: any[], filterName: string,isLoaded:boolean })=> {
+const ActiveBarFilter = ({ elements, filterName }: { elements: any[], filterName: string })=> {
     const dispatch = useDispatch<AppDispatch>();
     const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
+        console.log(event.target, 'event.target')
         const { name, checked, value } = event.target;
         // Construct the filter object
         const filterItem = { id: value, name, status: checked };
@@ -15,7 +16,7 @@ const ActiveBarFilter = ({ elements, filterName,isLoaded }: { elements: any[], f
     return (
         <div>
             {
-          isLoaded && elements?.filter((elem:any)=> elem.name === filterName)[0].elements?.map((item: any) => (
+          elements?.filter((elem:any)=> elem.name === filterName)[0].elements?.map((item: any) => (
                 <div key={item.name}>
                     <label >
                         <input

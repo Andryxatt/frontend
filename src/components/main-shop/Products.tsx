@@ -1,4 +1,4 @@
-import { Product } from "../../models/product.model";
+import { Product, ProductOnformation } from "../../models/product.model";
 import SingleProduct from "./SingleProduct";
 import { useAppSelector } from "../../store/hooks";
 import { useEffect, useState } from "react";
@@ -7,7 +7,6 @@ import { fetchProducts } from "../../store/slices/product.slice";
 import { AppDispatch } from "../../store/store";
 import { loadMoreProduct } from "../../store/slices/blacklist.slice";
 import { BsFillGrid3X3GapFill, BsFillGridFill } from "react-icons/bs";
-import MainLayout from "../../layouts/MainLayout";
 import ActiveBar from "./ActiveBar";
 import styles from "./Products.module.sass";
 const Products = () => {
@@ -36,7 +35,7 @@ const Products = () => {
   }
   
   return (
-    <MainLayout>
+    <>
       <div className="flex flex-row justify-between items-center">
         <span> {products?.length} Товарів </span>
         <div className={styles.gridControlls}>
@@ -44,11 +43,11 @@ const Products = () => {
           <button onClick={() => setGridSize(4)} className="pr-2"><BsFillGridFill /></button>
         </div>
       </div>
-      <hr className="mb-4" />
+      <hr className="mb-4 sm:items-center"/>
       <div className={styles.wrapper}>
         <div className={`${styles.productsWrapper} ${gridSize === 3 ? styles.gridCol3 : styles.gridCol4}`}>
           {
-            products?.length > 0 ? products?.map((product: Product) => <SingleProduct key={product.id} product={product} />) : <h1>Не знайдено товарів за заданними критеріями!</h1>
+            products?.length > 0 ? products?.map((product: ProductOnformation) => <SingleProduct key={product.id} product={product} />) : <h1>Не знайдено товарів за заданними критеріями!</h1>
           }
         </div>
         <ActiveBar toggleFilters={toggleFilters} showFilters={showFilters} />
@@ -56,10 +55,9 @@ const Products = () => {
           Фільтри
         </button>
       </div>
-      <button onClick={() => { loadMore() }}>Load More</button>
-    </MainLayout>
+      <button onClick={loadMore}>Load More</button>
+    </>
   );
-
-}
+        }
 
 export default Products;

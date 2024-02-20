@@ -35,6 +35,8 @@ import GenderEdit from './components/gender/GenderEdit.tsx';
 import SeasoneEdit from './components/seasone/SeasoneEdit.tsx';
 import LoadDataWithFile from './components/products/LoadDataWithFile.tsx';
 import LikedProducts from './components/main-shop/LikedProducts.tsx';
+import NotFound from './components/errors/NotFound.tsx';
+import Cart from './components/main-shop/Cart.tsx';
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
@@ -65,12 +67,13 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <Route path="/dashboard/products" element={<ProductList />} />
           <Route path="/dashboard/loadexcel" element={<LoadDataWithFile />} />
           <Route path="/products" element={<Products />} />
-          <Route path="*" element={<h1>Not Found</h1>} />
           <Route path="/dashboard/products/edit/:id" element={<ProductEdit/>} />
           <Route path="/products/:id" element={<ProductDetails/>} />
           <Route path="/dashboard/products/:id" element={<ProductEdit/>} />
           <Route path="/acount" element={<AccountInformation/>} />
           <Route path="/liked" element={<LikedProducts/>} />
+          <Route path="/cart" element={<Cart/>} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </PersistGate>

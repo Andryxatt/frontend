@@ -142,7 +142,6 @@ const ProductNew = () => {
         return subs;
     }, [currentCat])
     const changeCategory = (e: any) => {
-        console.log(e)
         if (subCategoriesRef.current.state.selectValue.length !== 0) {
             //clear ref
             subCategoriesRef.current.clearValue()

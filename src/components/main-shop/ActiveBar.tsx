@@ -4,9 +4,9 @@ import { FaXmark } from "react-icons/fa6";
 import { useAppSelector } from "../../store/hooks";
 import { AppDispatch } from "../../store/store";
 import { useDispatch } from "react-redux";
-import ActiveBarFilter from "./ActiveBarFilter";
 import { useEffect } from "react";
 import styles from './ActiveBar.module.sass';
+import FlushAccordion from "../UI/FlushAccordion";
 
 const ActiveBar = ({ toggleFilters, showFilters }: any) => {
     const dispatch = useDispatch<AppDispatch>();
@@ -51,14 +51,7 @@ const ActiveBar = ({ toggleFilters, showFilters }: any) => {
                     toggleFilters()
                 }}><FaXmark /></button>
             </div>
-            <div>
-                <h3>Бренди</h3>
-                <ActiveBarFilter elements={filters} isLoaded={isLoaded!} filterName="brand" />
-            </div>
-            <div>
-                <h3>Категорії</h3>
-                <ActiveBarFilter elements={filters} isLoaded={isLoaded!} filterName="subCategories" />
-            </div>
+            <FlushAccordion filters={filters} isLoaded={isLoaded}/>
             <button onClick={applayFilters}>Застосувати</button>
         </div>
     )
