@@ -24,5 +24,25 @@ export interface Product {
     colores: Color[];
     gender: Gender | number;
     seasone: number | Season;
-
+    status: string;
+}
+export interface ProductOnformation {
+    id: number;
+    name: string;
+    model: string;
+    brand: Brand;
+    qrCode?: string;
+    subCategories: SubCategory[];
+    sizes: any[];
+    images: any[];
+    price: number;
+    discount: Discount;
+    curencyPrice: number;
+    roles: string[];
+    description: string;
+    features: Feature[];
+    colores: Color[];
+    gender: Gender;
+    seasone: Season;
+    status: string;
 }

@@ -1,6 +1,6 @@
 const LoginHeader = () => {
     return (
-        <header >
+        <header className="">
             <h1>Log In</h1>
         </header>
     )

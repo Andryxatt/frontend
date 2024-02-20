@@ -29,11 +29,11 @@ const SingleProduct = ({ product }: any) => {
         navigate(`/products/${product.id}`);
     }
     return (
-        <div className="rounded overflow-hidden shadow-lg ">
+        <div className="rounded overflow-hidden shadow-lg max-w-[300px]">
             <div className="cursor-pointer relative" onClick={()=>{
                 showProductDetails(product)
                 }}>
-                <img src={`${import.meta.env.VITE_API_URL}${product?.images[0]?.imagePath}`} alt="Sunset in the mountains" />
+                <img className="" src={`${import.meta.env.VITE_API_URL}${product?.images[0]?.imagePath}`} alt="Sunset in the mountains" />
                 
                     <span className="absolute top-2 left-2">{product?.status}</span>
                     <button onTouchStart={toggleLike} onClick={toggleLike} className="absolute right-2 top-2 cursor-pointer">
@@ -47,7 +47,7 @@ const SingleProduct = ({ product }: any) => {
                 </div>
             </div>
             <div className="px-2 pt-1 pb-2">
-                <h3>{product?.brand.name}</h3>
+                <h3> {product.subCategories[0].name} - {product?.brand.name}</h3>
                 <ul className="flex flex-row">
                     {product?.sizes.map((size: any) => (
                         <li className="px-1 border-2 border-gray-200 mr-1" key={size.id}>

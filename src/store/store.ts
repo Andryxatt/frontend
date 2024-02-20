@@ -7,10 +7,11 @@ import productSlice from './slices/product.slice'
 import blackListSlice from './slices/blacklist.slice'
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; 
+import cartSlice from './slices/cart.slice'
 const persistConfig = {
   key: 'root', 
   storage,
-  whitelist: ['productSlice', 'brandSlice', 'categorySlice', 'userSlice'], 
+  whitelist: ['productSlice', 'brandSlice', 'categorySlice', 'userSlice','cartSlice'], 
 };
 
 const rootReducer =  combineReducers({
@@ -19,6 +20,7 @@ const rootReducer =  combineReducers({
   categorySlice: categorySlice,
   userSlice: userSlice,
   blackListSlice: blackListSlice,
+  cartSlice: cartSlice,
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 

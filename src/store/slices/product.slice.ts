@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Product } from '../../models/product.model';
+import { Product, ProductOnformation } from '../../models/product.model';
 import ProductDataService from '../../services/products.service';
 interface ProductPagination {
   total: number;
-  products: Product[];
+  products: ProductOnformation[];
   loading: boolean;
   error: string | null;
-  selectedProduct: Product | null;
+  selectedProduct: ProductOnformation | null;
   likedProducts: Product[];
 }
 const initialState: ProductPagination = {

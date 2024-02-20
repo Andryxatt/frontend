@@ -5,9 +5,7 @@ import MainLayout from "../layouts/MainLayout";
 const Main = () => {
     return (
         <MainLayout>
-            <div className="container mx-auto px-4 flex-row">
                 <Products />
-            </div>
         </MainLayout>
     );
 }
