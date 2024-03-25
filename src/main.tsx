@@ -5,38 +5,38 @@ import { Routes } from 'react-router'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import Dashboard from './pages/Dashboard.tsx'
-import BrandList from './components/brand/BrandList.tsx'
-import ProductList from './components/products/ProductList.tsx'
-import CategoryList from './components/category/CategoryList.tsx'
-import SubCategoryList from './components/subCategory/SubCategoryList.tsx'
-import SizeList from './components/size/SizeList.tsx'
-import ProductEdit from './components/products/ProductEdit.tsx'
+import BrandList from './components/dahsboard/brand/BrandList.tsx'
+import ProductList from './components/dahsboard/products/ProductList.tsx'
+import CategoryList from './components/dahsboard/category/CategoryList.tsx'
+import SubCategoryList from './components/dahsboard/subCategory/SubCategoryList.tsx'
+import SizeList from './components/dahsboard/size/SizeList.tsx'
+import ProductEdit from './components/dahsboard/products/ProductEdit.tsx'
 import Main from './pages/Main.tsx'
 import Login from './pages/Login.tsx'
 import Register from './pages/Register.tsx'
-import AccountInformation from './pages/acount/AccountInformation.tsx'
+import Account from './pages/Account.tsx'
 import { store, persistor } from './store/store';
 import { PersistGate } from 'redux-persist/integration/react'
 import ProductDetails from './components/main-shop/ProductDetails.tsx'
 import Products from './components/main-shop/Products.tsx'
-import SeasonesList from './components/seasone/SeasoneList.tsx'
-import ColorList from './components/color/ColorList.tsx'
-import GenderList from './components/gender/GenderList.tsx'
-import FeatureList from './components/feature/FeatureList.tsx'
-import DiscountList from './components/discount/DiscountList.tsx'
-import BrandEdit from './components/brand/BrandEdit.tsx'
-import CategoryEdit from './components/category/CategoryEdit.tsx';
-import SubCategoryEdit from './components/subCategory/SubCategoryEdit.tsx';
-import ColorEdit from './components/color/ColorEdit.tsx';
-import DiscountEdit from './components/discount/DiscountEdit.tsx';
-import SizeEdit from './components/size/SizeEdit.tsx';
-import FeatureEdit from './components/feature/FeatureEdit.tsx';
-import GenderEdit from './components/gender/GenderEdit.tsx';
-import SeasoneEdit from './components/seasone/SeasoneEdit.tsx';
-import LoadDataWithFile from './components/products/LoadDataWithFile.tsx';
+import SeasonesList from './components/dahsboard/seasone/SeasoneList.tsx'
+import ColorList from './components/dahsboard/color/ColorList.tsx'
+import GenderList from './components/dahsboard/gender/GenderList.tsx'
+import FeatureList from './components/dahsboard/feature/FeatureList.tsx'
+import DiscountList from './components/dahsboard/discount/DiscountList.tsx'
+import BrandEdit from './components/dahsboard/brand/BrandEdit.tsx'
+import CategoryEdit from './components/dahsboard/category/CategoryEdit.tsx';
+import SubCategoryEdit from './components/dahsboard/subCategory/SubCategoryEdit.tsx';
+import ColorEdit from './components/dahsboard/color/ColorEdit.tsx';
+import DiscountEdit from './components/dahsboard/discount/DiscountEdit.tsx';
+import SizeEdit from './components/dahsboard/size/SizeEdit.tsx';
+import FeatureEdit from './components/dahsboard/feature/FeatureEdit.tsx';
+import GenderEdit from './components/dahsboard/gender/GenderEdit.tsx';
+import SeasoneEdit from './components/dahsboard/seasone/SeasoneEdit.tsx';
+import LoadDataWithFile from './components/dahsboard/products/LoadDataWithFile.tsx';
 import LikedProducts from './components/main-shop/LikedProducts.tsx';
 import NotFound from './components/errors/NotFound.tsx';
-import Cart from './components/main-shop/Cart.tsx';
+import Cart from './components/main-shop/shopping-cart/Cart.tsx';
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
@@ -70,7 +70,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <Route path="/dashboard/products/edit/:id" element={<ProductEdit/>} />
           <Route path="/products/:id" element={<ProductDetails/>} />
           <Route path="/dashboard/products/:id" element={<ProductEdit/>} />
-          <Route path="/acount" element={<AccountInformation/>} />
+          <Route path="/acount" element={<Account/>} />
           <Route path="/liked" element={<LikedProducts/>} />
           <Route path="/cart" element={<Cart/>} />
           <Route path="*" element={<NotFound />} />

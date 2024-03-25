@@ -197,7 +197,7 @@ export const apiSlice = createApi({
 
 
 
-    getSybCategories: builder.query({
+    getSubCategories: builder.query({
       // The URL for the request is '/fakeApi/posts'
       query: () => '/sub-categories',
       providesTags: ['SubCategories']
@@ -282,7 +282,7 @@ export const {
   useDeleteCategoryMutation,
   useGetCategoryQuery,
   //SubCategory
-  useGetSybCategoriesQuery,
+  useGetSubCategoriesQuery,
   useNewSubCategoryMutation,
   useUpdateSubCategoryMutation,
   useDeleteSubCategoryMutation,
