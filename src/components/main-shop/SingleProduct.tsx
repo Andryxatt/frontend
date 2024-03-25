@@ -6,9 +6,7 @@ import { likeProduct } from "../../store/slices/product.slice";
 import { useAppSelector } from "../../store/hooks";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
-const priceInUAH = (price: number) => {
-    return `${Math.round(Math.ceil(price * 38) / 50) * 60} UAH`;
-}
+
 
 const SingleProduct = ({ product }: any) => {
     const dispatch = useDispatch<AppDispatch>();
@@ -28,14 +26,14 @@ const SingleProduct = ({ product }: any) => {
     const showProductDetails = (product: Product) => {
         navigate(`/products/${product.id}`);
     }
-    const statuses = [
-        { name: "Новий" },
-        { name: "В наявності" },
-        { name: "Закінчився" },
-        { name: "Видалений" },
-        { name: "Відсутній" },
-        { name: "Відновлено" }
-    ]
+    // const statuses = [
+    //     { name: "Новий" },
+    //     { name: "В наявності" },
+    //     { name: "Закінчився" },
+    //     { name: "Видалений" },
+    //     { name: "Відсутній" },
+    //     { name: "Відновлено" }
+    // ]
 
     return (
         <div className="rounded overflow-hidden shadow-lg product-card">
