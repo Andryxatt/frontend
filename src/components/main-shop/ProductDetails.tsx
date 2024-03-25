@@ -14,10 +14,7 @@ const ProductDetails = () => {
   const notifyWarning = () => toast("Оберіть хочаб один розмір!");
   const dispatch = useDispatch<AppDispatch>();
   const [selectedSizes, setSelectedSizes] = useState<any[]>([]);
-  const priceInUAH = (price: number, curencyPrice: number) => {
-    console.log(price, curencyPrice)
-    return `${Math.round(Math.ceil(price * curencyPrice) / 50) * 60} UAH`;
-  }
+
   const { id } = useParams();
   useEffect(() => {
     dispatch(selectProduct(Number(id)))

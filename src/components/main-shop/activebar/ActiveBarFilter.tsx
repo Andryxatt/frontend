@@ -3,12 +3,12 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store/store";
 
 const ActiveBarFilter = ({ elements, filterName }: { elements: any[], filterName: string })=> {
-    const dispatch = useDispatch<AppDispatch>();
     const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
         console.log(event.target, 'event.target')
         const { name, checked, value } = event.target;
         // Construct the filter object
         const filterItem = { id: value, name, status: checked };
+        console.log(filterItem, 'filterItem')
         // Dispatch action to update filters state
         // dispatch(setFilter({ filterName, element: filterItem }));
     }
