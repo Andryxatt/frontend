@@ -1,6 +1,4 @@
 import { ChangeEvent } from "react";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../store/store";
 
 const ActiveBarFilter = ({ elements, filterName }: { elements: any[], filterName: string })=> {
     const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
