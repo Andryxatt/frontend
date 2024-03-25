@@ -1,15 +1,15 @@
+import { BrandFormData, NewBrand } from "../models/brand.model";
 export const brandsApi = (builder: any) => ({
     getBrands: builder.query({
-      // The URL for the request is '/fakeApi/posts'
       query: () => '/brands',
-      providesTags: ['Brands']
+      providesTags: ['Brands'],
     }),
     getBrand: builder.query({
-      query: (id: any) => `/brands/${id}`,
+      query: (id: number) => `/brands/${id}`,
       providesTags: ['Brands']
     }),
     addNewBrand: builder.mutation({
-      query: (newBrand: any) => ({
+      query: (newBrand: NewBrand) => ({
         url: '/brands',
         method: 'POST',
         body: newBrand
@@ -17,8 +17,7 @@ export const brandsApi = (builder: any) => ({
       invalidatesTags: ['Brands']
     }),
     updateBrand: builder.mutation({
-      query: ({ id, formData }: any) => ({
-
+      query: ({ id, formData }: {id: number, formData: BrandFormData}) => ({
         url: `/brands/${id}`,
         method: 'PATCH',
         body: formData,
@@ -26,7 +25,7 @@ export const brandsApi = (builder: any) => ({
       invalidatesTags: ['Brands']
     }),
     deleteBrand: builder.mutation({
-      query: (id: any) => ({
+      query: (id: number) => ({
         url: `/brands/${id}`,
         method: 'DELETE'
       }),

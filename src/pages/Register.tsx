@@ -5,8 +5,8 @@ import MainLayout from "../layouts/MainLayout";
 type RegisterValues = {
     email: string;
     password: string;
-    passwordConfirm: string;
-    username: string;
+    confirmPassword: string;
+    name: string;
 }
 const Register = () => {
     const history = useNavigate();
@@ -17,8 +17,6 @@ const Register = () => {
             history('/login');
         }).catch((error) => {
             if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
                 console.log(error.response.data.message);
                 console.log(error.response.status);
                 console.log(error.response.headers);
@@ -40,7 +38,7 @@ const Register = () => {
                             <h1>Зареєструватися</h1>
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                                 Емейл
                             </label>
                             <input
@@ -56,30 +54,17 @@ const Register = () => {
                             {errors?.email && <p className="text-red-600">{errors.email.message}</p>}
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
                                 Ім'я
                             </label>
                             <input
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                {...register("username", {
+                                {...register("name", {
                                     required: "Введіть ім'я користувача",
                                 })}
-                                placeholder="username" />
-                            {errors?.username && <p className="text-red-600">{errors.username.message}</p>}
+                                placeholder="name" />
+                            {errors?.name && <p className="text-red-600">{errors.name.message}</p>}
                         </div>
-                        {/* <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="mobilePhone">
-                                Телефон
-                            </label>
-                            <input
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                {...register("mobilePhone", {
-                                    required: "Введіть номер телефону",
-                                   
-                                })}
-                                placeholder="380-000-000-0000" />
-                            {errors?.mobilePhone && <p className="text-red-600">{errors.mobilePhone.message}</p>}
-                        </div> */}
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                                 Пароль
@@ -98,12 +83,12 @@ const Register = () => {
                             {errors?.password && <p className="text-red-600">{errors.password.message}</p>}
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold" htmlFor="passwordConfirm">
+                            <label className="block text-gray-700 text-sm font-bold" htmlFor="confirmPassword">
                                 Підтвердження паролю
                             </label>
                             <input
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                {...register("passwordConfirm", {
+                                {...register("confirmPassword", {
                                     required: "Підтвердіть пароль",
                                     minLength:{
                                         value: 8,
@@ -116,7 +101,7 @@ const Register = () => {
                                 })} 
                                 type="password" 
                                 placeholder="**********" />
-                            {errors?.passwordConfirm && <p className="text-red-600">{errors.passwordConfirm.message}</p>}
+                            {errors?.confirmPassword && <p className="text-red-600">{errors.confirmPassword.message}</p>}
                         </div>
                         <div className="flex items-center justify-between">
                             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">

@@ -1,0 +1,35 @@
+/* Style can be customized as needed */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+    -webkit-appearance: none
+    margin: 0
+input[type=number]
+    -moz-appearance: textfield
+
+.btn-remove-item, .btn-add-item
+    position: relative
+    width: 15px
+    height: 15px
+.btn-remove-item:before
+    position: absolute
+    width: 1rem
+    height: 2px
+    background-color: #000
+    content: ''
+.btn-add-item:before
+    position: absolute
+    width: 1rem
+    height: 2px
+    background-color: #000
+    content: ''
+    right: 0
+    
+.btn-add-item:after
+    position: absolute
+    width: 1rem
+    height: 2px
+    background-color: #000
+    content: ''
+    transform: rotate(90deg)
+    right: 0
+    

@@ -26,7 +26,7 @@ export interface Product {
     seasone: number | Season;
     status: string;
 }
-export interface ProductOnformation {
+export interface ProductInformation {
     id: number;
     name: string;
     model: string;

@@ -13,9 +13,7 @@ const MainLayout: React.FC<MainLayoutProps> =  React.memo(({ children }) => {
             <MainHeader />
             <div className="md:px-10 mobile:px-0">
                 {children}
-            </div>
-            <MainFooter />
-            <ToastContainer
+                <ToastContainer
                 position="top-right"
                 autoClose={3000}
                 hideProgressBar={false}
@@ -27,6 +25,9 @@ const MainLayout: React.FC<MainLayoutProps> =  React.memo(({ children }) => {
                 pauseOnHover
                 theme="dark"
             />
+            </div>
+            <MainFooter />
+          
         </div>
     );
 });

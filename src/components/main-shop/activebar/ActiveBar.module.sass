@@ -1,0 +1,25 @@
+@import "../../../App.module.sass"
+.activeBarWrapper
+    position: fixed
+    top: 0
+    z-index: 2
+    width: 300px
+    height: 100vh
+    right: 0
+    height: 100vh
+    flex-direction: column
+    transition: transform 0.3s ease-out
+    transform: translateX(0%)
+    background: #ffcc33
+    box-shadow: -5px 0px 15px rgba(100, 10, 0, 0.4)
+    padding: 3px
+    &.hide
+        transform: translateX(120%)
+
+.activeBarButton
+    display: flex
+    align-items: center
+    justify-content: space-between
+    cursor: pointer
+    background: $color-primary
+    transition: background-color 0.3s

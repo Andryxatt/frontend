@@ -1,30 +1,39 @@
 import { useAppSelector } from "../../store/hooks";
-import { useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import LinkNavMenu from "../../components/UI/LinkNavMenu";
-import searchIcon from '../../assets/icons/search.png';
 import phoneIcon from '../../assets/icons/phone-call.png';
 import userIcon from '../../assets/icons/user.png';
 import heartIcon from '../../assets/icons/heart.png';
-import CartIcon from "../../components/main-shop/CartIcon";
+import CartIcon from "../../components/main-shop/shopping-cart/CartIcon";
 import menuIcon from "../../assets/icons/menu.png";
-import CustomModal from "../../components/UI/CustomModal";
 import './MainHeader.sass'
+import { useDispatch } from "react-redux";
+import { setSearch } from "../../store/slices/blacklist.slice";
+import { AppDispatch } from "../../store/store";
+import { fetchProducts } from './../../store/slices/product.slice';
+import useDebounce from "../../customHooks/useDebounce";
 const MainHeader = () => {
     const likedProducts = useAppSelector((state: any) => state.productSlice.likedProducts);
     const user = useAppSelector((state: any) => state.userSlice.user);
-    const cartItems = useAppSelector((state: any) => state.cartSlice.cartItems);
+    const cartItems = useAppSelector((state: any) => state.cartSlice.cartElements);
     const [isOpen, setIsOpen] = useState(false);
-    const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+    const filters = useAppSelector((state) => state.blackListSlice);
+    const [inputValue, setInputValue] = useState(filters ? filters.search : '');
+    const dispatch = useDispatch<AppDispatch>();
+    const throttledInputValue = useDebounce(inputValue!, 500);
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value);
+        dispatch(setSearch(e.target.value));
+    };
+    useEffect(() => {
+        dispatch(fetchProducts({ ...filters, search: throttledInputValue }));
+    }, [throttledInputValue, dispatch]);
     return (
         <header className="header">
-            {isSearchOpen && <CustomModal isSearchOpen={isSearchOpen} setIsSearchOpen={setIsSearchOpen} />}
             <div className="wrapper">
                 <button className="custom_button" onClick={() => { setIsOpen(true) }}>
                     <img src={menuIcon} />
-                </button>
-                <button className="custom_button" onClick={() => setIsSearchOpen(true)}>
-                    <img className="icon" src={searchIcon} />
                 </button>
             </div>
             <h1 className="logo"><Link to="/">Step In Style</Link></h1>
@@ -35,14 +44,17 @@ const MainHeader = () => {
                 <button className="px-2">Дітям</button>
                 <button className="px-2">Знижки</button>
                 <button className="px-2">Бренди</button>
-                {
+                {/* {
                     user?.roles?.filter((role: string) => {
                         return role === 'user'
                     })[0] === 'user' && <LinkNavMenu popUpChildren={<>He</>} to="/dashboard"><p>Dash</p></LinkNavMenu>
-                }
+                } */}
+                <LinkNavMenu popUpChildren={<>He</>} to="/dashboard"><p>Dash</p></LinkNavMenu>
             </nav>
+            <div className="flex flex-row justify-center items-center gap-3">
+                <input className="p-1 rounded-md" value={inputValue} type="text" onChange={handleChange} placeholder="Пошук..." />
+            </div>
             <ul className="">
-                <li><img onClick={() => setIsSearchOpen(true)} className="icon mr-2" src={searchIcon} /></li>
                 <li><img className="icon mr-2" src={phoneIcon} /></li>
                 <Link to={`${user.roles ? "/acount" : "/login"}`} className="mr-2"><img className="icon" src={userIcon} /></Link>
                 <Link to="/liked" className="relative mr-2"><img className="icon" src={heartIcon} />{likedProducts?.length > 0 ? <span className="icon-info">{likedProducts?.length}</span> : ""}</Link>
@@ -57,7 +69,6 @@ const MainHeader = () => {
                     })[0] === 'user' && <NavLink to="/dashboard"><p>Dash</p></NavLink>
                 }
                 <button onClick={() => setIsOpen(false)}>Close menu</button>
-
             </div>
         </header>
     );
