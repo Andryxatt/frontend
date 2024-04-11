@@ -5,12 +5,10 @@ import { setColores } from "../../../store/slices/blacklist.slice";
 import { useAppSelector } from "../../../store/hooks";
 const AccordionItemColores = ({ elements, title, filterName }: { elements: any[], title: string, filterName: string }) => {
     const dispatch = useDispatch();
-    interface FindProductDto {
-        [key: string]: any;
-    }
+ 
 
     const [isOpen, setIsOpen] = useState(true);
-    const activeFilters = useAppSelector((state: { blackListSlice: FindProductDto }) => state.blackListSlice[filterName]);
+    const activeFilters = useAppSelector((state: { blackListSlice: any }) => state.blackListSlice.filters[filterName]);
     const handleAccordionClick = () => {
         // Close all other AccordionItems
         setIsOpen(!isOpen);

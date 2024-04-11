@@ -1,4 +1,4 @@
-import DashboardLayout from "../../../layouts/DashboardLayout";
+import DashboardLayout from "../../../layouts/dashboard/DashboardLayout";
 import { useParams } from "react-router";
 import { useGetColorQuery, useUpdateColoresMutation } from "../../../api/apiSlice";
 import CustomInput from "../../UI/CustomInput";

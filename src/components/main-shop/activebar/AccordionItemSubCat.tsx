@@ -10,8 +10,8 @@ const AccordionItemSubCat = ({ elements, title, filterName }: { elements: any[],
     }
 
     const [isOpen, setIsOpen] = useState(true);
-    const activeFilters = useAppSelector((state: { blackListSlice: FindProductDto }) => state.blackListSlice[filterName]);
-    const categories = useAppSelector((state: { blackListSlice: FindProductDto }) => state.blackListSlice.categories);
+    const activeFilters = useAppSelector((state: { blackListSlice: FindProductDto }) => state.blackListSlice.filters[filterName]);
+    const categories = useAppSelector((state: { blackListSlice: FindProductDto }) => state.blackListSlice.filters.categories);
     const handleAccordionClick = () => {
         // Close all other AccordionItems
         setIsOpen(!isOpen);

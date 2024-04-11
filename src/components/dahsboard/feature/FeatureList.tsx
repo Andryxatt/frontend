@@ -1,5 +1,5 @@
 
-import DashboardLayout from "../../../layouts/DashboardLayout";
+import DashboardLayout from "../../../layouts/dashboard/DashboardLayout";
 import { useGetFeaturesQuery } from '../../../api/apiSlice'
 import { Feature } from "../../../models/feature.model";
 import FeatureItem from "./FeatureItem";

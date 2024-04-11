@@ -4,6 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Routes } from 'react-router'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { store, persistor } from './store/store';
+import { PersistGate } from 'redux-persist/integration/react'
 import Dashboard from './pages/Dashboard.tsx'
 import BrandList from './components/dahsboard/brand/BrandList.tsx'
 import ProductList from './components/dahsboard/products/ProductList.tsx'
@@ -15,8 +17,6 @@ import Main from './pages/Main.tsx'
 import Login from './pages/Login.tsx'
 import Register from './pages/Register.tsx'
 import Account from './pages/Account.tsx'
-import { store, persistor } from './store/store';
-import { PersistGate } from 'redux-persist/integration/react'
 import ProductDetails from './components/main-shop/ProductDetails.tsx'
 import Products from './components/main-shop/Products.tsx'
 import SeasonesList from './components/dahsboard/seasone/SeasoneList.tsx'

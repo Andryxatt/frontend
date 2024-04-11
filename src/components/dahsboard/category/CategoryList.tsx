@@ -1,4 +1,4 @@
-import DashboardLayout from "../../../layouts/DashboardLayout";
+import DashboardLayout from "../../../layouts/dashboard/DashboardLayout";
 import CategoryNew from "./CategoryNew";
 import CategoryItem from "./CategoryItem";
 import { useGetCategoriesQuery } from '../../../api/apiSlice'

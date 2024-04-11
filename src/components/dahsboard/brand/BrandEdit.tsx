@@ -3,7 +3,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useParams } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
 
-import DashboardLayout from "../../../layouts/DashboardLayout";
+import DashboardLayout from "../../../layouts/dashboard/DashboardLayout";
 import CustomInput from "../../UI/CustomInput";
 import { CustomTextarea } from "../../UI/CustomTextarea";
 

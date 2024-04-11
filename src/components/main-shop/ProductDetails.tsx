@@ -17,7 +17,7 @@ const ProductDetails = () => {
 
   const { id } = useParams();
   useEffect(() => {
-    dispatch(selectProduct(Number(id)))
+    dispatch(selectProduct(id!))
   }, [id]);
   const product = useAppSelector((state) => state.productSlice.selectedProduct);
   const addToCart = () => {
@@ -42,32 +42,29 @@ const ProductDetails = () => {
   return (
     <MainLayout>
       {
-        product &&
-        <div className="container mx-auto px-4 flex md:flex-row flex-col" >
-            <SlideShow images={product?.images} />
-          <div className="" >
-            <h2>{product?.name} </h2>
-            <p> {product?.brand.name} </p>
-            <p> {product?.subCategories[0].name} </p>
-            <p> {product?.status} </p>
-            <p> {product?.description} </p>
-            <p> {product?.price} </p>
-            <ul className="flex flex-row">
-              Доступні розміри:
-              {
-                product?.sizes.map((size) => (
-                  <li onClick={() => handleSelectSize(size)}
-                    className={`px-1 border-2 border-gray-200 mr-1 cursor-pointer ${isSelected(size) ? selectedSizeClass : ''}`}
-                    key={size.id}>
-                    {size.size.CM} cм
-                  </li>
-                ))}
-            </ul>
-            <button onClick={addToCart} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >
-              Додати в кошик
-            </button>
+        product === undefined ? <h1>Loading...</h1> :
+        <div className="flex flex-col sm:flex-row justify-between">
+           {product?.images !== undefined && product?.images?.length > 0} <SlideShow images={product?.images} />
+            <div className="w-full ml-8" >
+              <h2> {product?.subCategories[0]?.name}  <b>{product?.brand?.name}</b> {product?.name} </h2>
+              <p> {product?.description} </p>
+              <p> Ціна: {product?.price} </p>
+              <ul className="flex flex-row">
+                Доступні розміри:
+                {
+                  product?.sizes?.map((size) => (
+                    <li onClick={() => handleSelectSize(size)}
+                      className={`px-1 border-2 border-gray-200 mr-1 cursor-pointer ${isSelected(size) ? selectedSizeClass : ''}`}
+                      key={size.id}>
+                      {size.size.CM} cм
+                    </li>
+                  ))}
+              </ul>
+              <button onClick={addToCart} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >
+                Додати в кошик
+              </button>
           </div>
-        </div>
+        </div> 
       }
     </MainLayout>
   )

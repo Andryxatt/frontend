@@ -1,4 +1,4 @@
-import DashboardLayout from "../../../layouts/DashboardLayout";
+import DashboardLayout from "../../../layouts/dashboard/DashboardLayout";
 import SubCategoryItem from "./SubCategoryItem";
 import SubCategoryNew from "./SubCategoryNew";
 import { useState } from "react";

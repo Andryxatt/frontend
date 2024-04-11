@@ -1,4 +1,4 @@
-import DashboardLayout from "../../../layouts/DashboardLayout";
+import DashboardLayout from "../../../layouts/dashboard/DashboardLayout";
 import { useParams } from "react-router";
 import { useGetGenderQuery, useUpdateGenderMutation } from "../../../api/apiSlice";
 import { toast } from "react-toastify";

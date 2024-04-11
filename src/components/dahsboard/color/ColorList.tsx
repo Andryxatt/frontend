@@ -1,5 +1,5 @@
 
-import DashboardLayout from "../../../layouts/DashboardLayout";
+import DashboardLayout from "../../../layouts/dashboard/DashboardLayout";
 import { useGetColoresQuery } from '../../../api/apiSlice'
 import ColorItem from "./ColorItem";
 import { Color } from "../../../models/color.model";

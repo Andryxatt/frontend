@@ -11,11 +11,11 @@ export interface ProductFilters {
 }
 export type FindProductDto = {
   pageNumber?: number;
-  limit?: number;
+  limit: number;
   search?: string;
   categories?: any[];
-  minPrice?: number;
-  maxPrice?: number;
+  minPrice: number;
+  maxPrice: number;
   brands?: any[];
   orderBy?: string;
   subCategories?: any[];
@@ -25,17 +25,18 @@ export type FindProductDto = {
   discount?: boolean;
   seasones?: any[];
   features?: any[];
-} & {
-  isActive?: boolean;
-  isLoaded?: boolean;
+} 
+export type DefaultState = {
+  filters: FindProductDto;
+  isLoaded: boolean;
+  isActive: boolean;
 };
-const initialState: FindProductDto = {
+const initialState: DefaultState = {
+ filters:{
   pageNumber: 1,
   limit: 10,
   search: '',
-  isActive: false,
-  isLoaded: false,
-  minPrice: 10,
+  minPrice: 0,
   maxPrice: 10000,
   categories: [],
   brands: [],
@@ -46,6 +47,9 @@ const initialState: FindProductDto = {
   discount: false,
   seasones: [],
   features: [],
+ },
+  isLoaded: false,
+  isActive: false,
 };
 
 export const blackListSlice = createSlice({
@@ -54,93 +58,79 @@ export const blackListSlice = createSlice({
   reducers: {
     setBrands(state, action: PayloadAction<any>) {
       //update state if item allready in array remove it else add it
-      const index = state.brands?.findIndex((brand) => brand.item.id === action.payload.item.id);
+      const index = state.filters.brands?.findIndex((brand) => brand.item.id === action.payload.item.id);
       if (index !== -1) {
-        state.brands?.splice(index!, 1);
+        state.filters.brands?.splice(index!, 1);
       } else {
-        state.brands = [...(state.brands || []), action.payload]
+        state.filters.brands = [...(state.filters.brands || []), action.payload]
       }
     },
     setCategories(state, action: PayloadAction<any>) {
-      const index = state.categories?.findIndex((category) => category.item.id === action.payload.item.id);
+      const index = state.filters.categories?.findIndex((category) => category.item.id === action.payload.item.id);
       if (index !== -1) {
-        if(state.subCategories?.length! > 0){
-          state.subCategories = []
+        if(state.filters.subCategories?.length! > 0){
+          state.filters.subCategories = []
         }
-        state.categories?.splice(index!, 1);
+        state.filters.categories?.splice(index!, 1);
       } else {
-        state.categories = [...(state.categories || []), action.payload]
+        state.filters.categories = [...(state.filters.categories || []), action.payload]
       }
     },
     setColores(state, action: PayloadAction<any>) {
-      const index = state.colores?.findIndex((color) => color.item.name === action.payload.item.name);
+      const index = state.filters.colores?.findIndex((color) => color.item.name === action.payload.item.name);
       if (index !== -1) {
-        state.colores?.splice(index!, 1);
+        state.filters.colores?.splice(index!, 1);
       } else {
-        state.colores = [...(state.colores || []), action.payload]
+        state.filters.colores = [...(state.filters.colores || []), action.payload]
       }
     },
     setDiscount(state, action: PayloadAction<boolean>) {
-      state.discount = action.payload;
+      state.filters.discount = action.payload;
     },
     setFeatures(state, action: PayloadAction<number[]>) {
-      state.features = action.payload;
+      state.filters.features = action.payload;
     },
     setGender(state, action: PayloadAction<string>) {
-      state.gender = action.payload;
+      state.filters.gender = action.payload;
     },
     setOrderBy(state, action: PayloadAction<string>) {
-      state.orderBy = action.payload;
+      state.filters.orderBy = action.payload;
     },
     setPageNumber(state, action: PayloadAction<number>) {
-      state.pageNumber = action.payload;
+      state.filters.pageNumber = action.payload;
     },
     setSeasones(state, action: PayloadAction<number[]>) {
-      state.seasones = action.payload;
+      state.filters.seasones = action.payload;
     },
     setSizes(state, action: PayloadAction<any>) {
-      state.sizes = action.payload;
+      state.filters.sizes = action.payload;
     },
     setSubCategories(state, action: PayloadAction<any>) {
-      const index = state.subCategories?.findIndex((subCat) => subCat.item.name === action.payload.item.name);
+      const index = state.filters.subCategories?.findIndex((subCat) => subCat.item.name === action.payload.item.name);
       if (index !== -1) {
-        state.subCategories?.splice(index!, 1);
+        state.filters.subCategories?.splice(index!, 1);
       } else {
-        state.subCategories = [...(state.subCategories || []), action.payload]
+        state.filters.subCategories = [...(state.filters.subCategories || []), action.payload]
       }
     },
-    setLimit(state, action: PayloadAction<number>) {
-      state.limit = action.payload;
+    setLimit(state) {
+      //prvious state + 10
+      state.filters.limit = state.filters.limit + 10;
     },
     setMinPrice(state, action: PayloadAction<number>) {
-      state.minPrice = action.payload;
+      state.filters.minPrice = action.payload;
     },
     setMaxPrice(state, action: PayloadAction<number>) {
-      state.maxPrice = action.payload;
+      state.filters.maxPrice = action.payload;
     },
     setLoadMore(state, action: PayloadAction<number>) {
-      state.limit = action.payload;
+      state.filters.limit = action.payload;
     },
     clearFilters(state) {
-      state.pageNumber= 1;
-      state.limit= 10;
-      state.search = '';
-      state.isActive = false;
-      state.isLoaded = false;
-      state.minPrice = 10;
-      state.maxPrice = 10000;
-      state.categories = [];
-      state.brands = [];
-      state.orderBy = 'price';
-      state.subCategories = [];
-      state.colores = [];
-      state.sizes = [];
-      state.discount = false;
-      state.seasones = [];
-      state.features = [];
+     state.filters = initialState.filters;
     },
     setSearch(state, action: PayloadAction<string>) {
-      state.search = action.payload;
+      state.filters.search = action.payload;
     },
     // loadMoreProduct(state, action: PayloadAction<number>) {
     //   state.limit = action.payload;
@@ -197,7 +187,7 @@ export const {
   setSubCategories, setLimit, setMinPrice, setMaxPrice,
   clearFilters, setActiveFilters, setSearch
 
-} =
-  blackListSlice.actions;
+} = blackListSlice.actions;
+
 export default blackListSlice.reducer;
 

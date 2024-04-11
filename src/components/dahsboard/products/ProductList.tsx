@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useGetProductsQuery } from "../../../api/apiSlice";
-import DashboardLayout from "../../../layouts/DashboardLayout";
+import DashboardLayout from "../../../layouts/dashboard/DashboardLayout";
 import { Product } from "../../../models/product.model";
 import ProductItem from "./ProductItem";
 import ProductNew from "./ProductNew";
@@ -10,7 +10,7 @@ import { useAppSelector } from "../../../store/hooks";
 const ProductList = () => {
   const [showProductNew, setShowProductNew] = useState(false)
   const loadButtonRef = React.useRef<HTMLButtonElement>(null)
-  const filters = useAppSelector((state) => state.blackListSlice);
+  const filters = useAppSelector((state) => state.blackListSlice.filters);
   const {
     data,
     isLoading,
@@ -41,7 +41,7 @@ const ProductList = () => {
   }
   return (
     <DashboardLayout>
-      <div className="p-4">
+      <div className="flex flex-row flex-wrap gap-4">
         <button onClick={() => setShowProductNew(cur => !cur)} className="bg-slate-600 mr-2 text-white p-2 rounded-md">Додати товар</button>
         <Link className="bg-slate-600 mr-2 text-white p-2 rounded-md" to="/dashboard/loadexcel">Завантажити за допомогою фалу</Link>
       </div>
@@ -53,10 +53,6 @@ const ProductList = () => {
             <th scope="col" className="px-6 py-4">ID</th>
             <th scope="col" className="px-6 py-4">Назва</th>
             <th scope="col" className="px-6 py-4">Модель</th>
-            <th scope="col" className="px-6 py-4">Бренд</th>
-            <th scope="col" className="px-6 py-4">Категорія</th>
-            <th scope="col" className="px-6 py-4">Розміри</th>
-            <th scope="col" className="px-6 py-4">Зображення</th>
             <th scope="col" className="px-6 py-4">Дії</th>
           </tr>
         </thead>
