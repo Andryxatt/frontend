@@ -7,13 +7,11 @@ import { AppDispatch } from "../../store/store";
 import { BsFillGrid3X3GapFill, BsFillGridFill } from "react-icons/bs";
 import styles from "./Products.module.sass";
 import ProductsGrid from "./ProductsGrid";
-import { Grid } from "react-loader-spinner";
 import { setActiveFilters, setLimit } from "../../store/slices/blacklist.slice";
 import useDebounce from "../../customHooks/useDebounce";
 import MainLayout from "../../layouts/MainLayout";
 const Products = () => {
   const products = useAppSelector((state: { productSlice: { products: ProductInformation[]; }; }) => state.productSlice.products);
-  const isLoading = useAppSelector((state: { productSlice: { isLoading: boolean; }; }) => state.productSlice.isLoading);
   const dispatch = useDispatch<AppDispatch>();
   const filters = useAppSelector((state) => state.blackListSlice.filters);
   const isActive = useAppSelector((state) => state.blackListSlice.isActive);

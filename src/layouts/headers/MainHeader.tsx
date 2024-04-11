@@ -17,7 +17,7 @@ const MainHeader = () => {
     const likedProducts = useAppSelector((state: any) => state.productSlice.likedProducts);
     const user = useAppSelector((state: any) => state.userSlice.user);
     const cartItems = useAppSelector((state: any) => state.cartSlice.cartElements);
-    const [isOpen, setIsOpen] = useState(false);
+    // const [isOpen, setIsOpen] = useState(false);
     const filters = useAppSelector((state) => state.blackListSlice.filters);
     const [inputValue, setInputValue] = useState(filters ? filters.search : '');
     const dispatch = useDispatch<AppDispatch>();
@@ -31,7 +31,7 @@ const MainHeader = () => {
     return (
         <header className="header">
             <div className="wrapper">
-                <button className="custom_button" onClick={() => { setIsOpen(true) }}>
+                <button className="custom_button">
                     <img src={menuIcon} />
                 </button>
             </div>
@@ -74,7 +74,7 @@ const MainHeader = () => {
                     user?.roles?.filter((role: string) => role === 'user')[0] === 'user' &&
                     <NavLink to="/dashboard"><p>Dash</p></NavLink>
                 }
-                <button onClick={() => setIsOpen(false)}>Close menu</button>
+                <button>Close menu</button>
             </motion.div>
         </header>
     );
