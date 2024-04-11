@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useGetSizesQuery } from "../../../api/apiSlice";
-import DashboardLayout from "../../../layouts/DashboardLayout";
+import DashboardLayout from "../../../layouts/dashboard/DashboardLayout";
 import { Size } from "../../../models/size.model";
 import SizeItem from "./SizeItem";
 import SizeNew from "./SizeNew";

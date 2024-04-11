@@ -1,4 +1,4 @@
-import DashboardLayout from "../../../layouts/DashboardLayout";
+import DashboardLayout from "../../../layouts/dashboard/DashboardLayout";
 import { useParams } from "react-router";
 import { useGetCategoriesQuery, useUpdateSubCategoryMutation, useGetSubCategoryQuery } from "../../../api/apiSlice";
 import { ToastContainer, toast } from "react-toastify";

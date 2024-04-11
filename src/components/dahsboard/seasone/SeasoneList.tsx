@@ -1,4 +1,4 @@
-import DashboardLayout from "../../../layouts/DashboardLayout";
+import DashboardLayout from "../../../layouts/dashboard/DashboardLayout";
 import { useGetSeasonesQuery } from '../../../api/apiSlice'
 import SeasoneItem from "./SeasoneItem";
 import SeasoneNew from "./SeasoneNew";

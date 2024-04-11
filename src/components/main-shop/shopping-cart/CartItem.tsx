@@ -27,7 +27,7 @@ const CartItem: React.FC<CartElement> = (item) => {
     }
     return (
         <>
-            <img className="w-[230px] h-[170px]" src={`${import.meta.env.VITE_FILE_URL}${product?.images[0]?.imagePath}`} alt="" />
+            <img className="w-[230px] h-[170px]" src={`${import.meta.env.VITE_API_URL}${product?.images[0]?.imagePath}`} alt="" />
             <span>{product?.price} USD</span>
             {
                 sizes?.map((size: CartElementSize, index: number) => {

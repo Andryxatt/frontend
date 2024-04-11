@@ -13,27 +13,12 @@ const ProductItem = ({ product }: { product: any }) => {
             <td className="whitespace-nowrap px-6 py-4">
                 {product.model}
             </td>
-            <td>
-                {product.brand.name}
-            </td>
-            <td className="whitespace-nowrap px-6 py-4">
-                {product.subCategories?.map((subCategory: any) => {
-                    return <span key={subCategory.name}>{subCategory.name}</span>
-                })
-                }
-            </td>
-            <td className="whitespace-nowrap px-6 py-4">
-                {
-                    product?.sizes?.map((sizeProduct: any) => {
-                        return <span key={sizeProduct.id}>{sizeProduct.size?.CM}-{sizeProduct.quantity}</span>
-                    })
-                }
-            </td>
-            <td className="whitespace-nowrap px-6 py-4">
+           
+            {/* <td className="whitespace-nowrap px-6 py-4">
                 {
                     <img className="w-[50px]" src={`${import.meta.env.VITE_FILE_URL}${product?.images[0]?.imagePath}`} />
                 }
-            </td>
+            </td> */}
             <td className="whitespace-nowrap px-6 py-4">
                 <Link to={`/dashboard/products/edit/${product?.id}`} className="bg-orange-400 hover:bg-orange-200 text-white font-bold py-2 px-4 rounded mr-2">Рудагувати</Link>
                 <button onClick={() => deleteProduct(product.id).then(() => {

@@ -5,14 +5,14 @@ import { FindProductDto } from './blacklist.slice';
 interface ProductPagination {
   total: number;
   products: ProductInformation[];
-  loading: boolean;
+  isLoading: boolean;
   error: string | null;
   selectedProduct: ProductInformation | null;
   likedProducts: Product[];
 }
 const initialState: ProductPagination = {
   products: [],
-  loading: true,
+  isLoading: true,
   error: null,
   total: 0,
   selectedProduct: null,
@@ -36,19 +36,19 @@ export const productSlice = createSlice({
   initialState,
   reducers: {
     fetchProductStart(state) {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     },
     fetchProductSuccess(state, action: PayloadAction<ProductPagination>) {
-      state.loading = false;
+      state.isLoading = false;
       state.products = action.payload.products;
       state.total = action.payload.total;
     },
     fetchProductFailure(state, action: PayloadAction<string>) {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.payload;
     },
-    selectProduct(state, action: PayloadAction<number>) {
+    selectProduct(state, action: PayloadAction<string>) {
       const selectedProduct = state.products.find((product) => product.id === action.payload);
       state.selectedProduct = selectedProduct || null;
     },
@@ -58,16 +58,16 @@ export const productSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = null;
     });
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.products = action.payload.products;
       state.total = action.payload.total;
     });
     builder.addCase(fetchProducts.rejected, (state, action) => {
-      state.loading = false;
+      state.isLoading = false;
       state.error = action.error.message || null;
     });
   }

@@ -1,7 +1,9 @@
 import React, { ReactNode } from "react";
-import DashboardSideBar from "./headers/DashboardSideBar";
+import DashboardSideBar from "./DashboardSideBar";
 import { ToastContainer } from "react-toastify";
-import DashboardNavMenu from "./headers/DashboardNavMenu";
+import DashboardNavMenu from "./DashboardNavMenu";
+import { ThemeProvider } from "../../contexts/ThemeProvider";
+
 type DashboardLayoutProps = {
     children: ReactNode;
 };
@@ -9,15 +11,17 @@ type DashboardLayoutProps = {
 // eslint-disable-next-line react-refresh/only-export-components
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
     return (
-        <div className="grid grid-rows-3 grid-cols-4 overflow-hidden">
-            <div className="row-span-5 col-end-1">
-                <DashboardSideBar />
-            </div>
-            <div className="col-start-1 col-span-4 row-end-1 w-full">
-                <DashboardNavMenu />
-            </div>
-            <div className="w-full col-start-1 row-start-1 row-span-4 col-span-4">
-                {children}
+        <ThemeProvider>
+            <div className="flex h-screen overflow-hidden">
+                <div className="w-16 sm:w-64">
+                    <DashboardSideBar />
+                </div>
+                <div className="flex-1 overflow-auto">
+                    <DashboardNavMenu />
+                    <div className="p-4">
+                        {children}
+                    </div>
+                </div>
             </div>
             <ToastContainer
                 position="top-right"
@@ -31,7 +35,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
                 pauseOnHover
                 theme="dark"
             />
-        </div>
+        </ThemeProvider>
     );
 }
 

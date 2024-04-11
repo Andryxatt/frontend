@@ -27,7 +27,7 @@ export interface Product {
     status: string;
 }
 export interface ProductInformation {
-    id: number;
+    id: string;
     name: string;
     model: string;
     brand: Brand;

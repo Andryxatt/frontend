@@ -26,7 +26,7 @@ const CustomInput = ({label, type, id, placeholder, validation, value}:any) => {
           id={id}
           type={type}
           defaultValue={value}
-          className="w-full h-full px-2 font-medium border rounded-md border-slate-300 placeholder:opacity-60"
+          className="w border rounded-sm p-2 border-slate-300 placeholder:opacity-60"
           placeholder={placeholder}
           {...register(id, validation)}
         />

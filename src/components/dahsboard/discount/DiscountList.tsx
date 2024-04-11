@@ -1,5 +1,5 @@
 
-import DashboardLayout from "../../../layouts/DashboardLayout";
+import DashboardLayout from "../../../layouts/dashboard/DashboardLayout";
 import { useGetDiscountsQuery } from '../../../api/apiSlice'
 import DiscountItem from "./DiscountItem";
 import { Discount } from "../../../models/discount.model";

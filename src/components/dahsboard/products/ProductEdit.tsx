@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useGetBrandsQuery, useGetCategoriesQuery, useGetProductByIdQuery, useGetSizesQuery, useGetSubCategoriesQuery, useDeleteProductImageMutation, useUpdateSingleProductMutation, useGetDiscountsQuery } from "../../../api/apiSlice";
-import DashboardLayout from "../../../layouts/DashboardLayout";
+import DashboardLayout from "../../../layouts/dashboard/DashboardLayout";
 import { useState, useMemo, useRef } from "react";
 import Select from "react-select";
 import { toast } from "react-toastify";
@@ -179,8 +179,8 @@ const ProductEdit = () => {
                         <Controller
                             name="discount"
                             defaultValue={{
-                                label: product?.discount.percentage,
-                                value: product?.discount.id,
+                                label: product?.discount?.percentage,
+                                value: product?.discount?.id,
                             }}
                             render={({ field }: any) => (
                                 <Select
@@ -217,8 +217,8 @@ const ProductEdit = () => {
                         <Controller
                             name="brandId"
                             defaultValue={{
-                                label: product?.brand.name,
-                                value: product?.brand.id,
+                                label: product?.brand?.name,
+                                value: product?.brand?.id,
                             }}
                             render={({ field }: any) => (
                                 <Select
@@ -242,8 +242,8 @@ const ProductEdit = () => {
                             name="category"
                             isLoading={categoriesIsLoading}
                             defaultValue={{
-                                label: product?.subCategories[0].category.name,
-                                value: product?.subCategories[0].category.id
+                                label: product?.subCategories[0]?.category?.name,
+                                value: product?.subCategories[0]?.category?.id
                             }}
                             options={categories?.map((value: any) => ({
                                 label: value.name,
@@ -276,7 +276,7 @@ const ProductEdit = () => {
                         <h3>Розміри</h3>
                         <div className="flex flex-row">
                             {
-                                product?.sizes.map((size: any) => {
+                                product?.sizes?.map((size: any) => {
                                     return <div key={size.id} className="col-span-1">
                                         <label htmlFor="discount">{size.size.CM}</label>
                                         <input onChange={(e) => changeQuantitySizes(e, size)} className="w-full border border-gray-300 rounded px-4 py-2" type="number" placeholder="quantity" defaultValue={size.quantity} />
@@ -316,9 +316,9 @@ const ProductEdit = () => {
                         <h3>Фото</h3>
                         <div className="flex flex-row">
                             {
-                                product?.images.map((image: any) => {
+                                product?.images?.map((image: any) => {
                                     return <div key={image.id}>
-                                        <img className="w-[150px]" src={`${import.meta.env.VITE_FILE_URL}${image?.imagePath}`} />
+                                        <img className="w-[150px]" src={`${import.meta.env.VITE_API_URL}${image?.imagePath}`} />
                                         <button type="button" onClick={() => deleteProductImage(image.id).unwrap()}>Видалити</button>
                                     </div>
                                 })

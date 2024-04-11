@@ -1,4 +1,4 @@
-import DashboardLayout from "../../../layouts/DashboardLayout";
+import DashboardLayout from "../../../layouts/dashboard/DashboardLayout";
 import { useGetGendersQuery } from '../../../api/apiSlice'
 import { Gender } from "../../../models/gender.model";
 import GenderItem from "./GenderItem";

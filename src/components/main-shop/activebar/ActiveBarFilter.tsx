@@ -1,15 +1,14 @@
-import { ChangeEvent } from "react";
 
 const ActiveBarFilter = ({ elements, filterName }: { elements: any[], filterName: string })=> {
-    const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
-        console.log(event.target, 'event.target')
-        const { name, checked, value } = event.target;
-        // Construct the filter object
-        const filterItem = { id: value, name, status: checked };
-        console.log(filterItem, 'filterItem')
-        // Dispatch action to update filters state
-        // dispatch(setFilter({ filterName, element: filterItem }));
-    }
+    // const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
+    //     console.log(event.target, 'event.target')
+    //     const { name, checked, value } = event.target;
+    //     // Construct the filter object
+    //     const filterItem = { id: value, name, status: checked };
+    //     console.log(filterItem, 'filterItem')
+    //     // Dispatch action to update filters state
+    //     // dispatch(setFilter({ filterName, element: filterItem }));
+    // }
     return (
         <div>
             {
@@ -21,7 +20,7 @@ const ActiveBarFilter = ({ elements, filterName }: { elements: any[], filterName
                             value={item.id}
                             name={item.name}
                             checked={item.status}
-                            onChange={handleCheckboxChange}
+                            // onChange={handleCheckboxChange}
                         />
                         {item.name}
                     </label>

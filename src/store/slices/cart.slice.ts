@@ -7,12 +7,12 @@ export type CartElementSize = {
 }
 
 export type CartElement = {
-    productId: number;
+    productId: string;
     sizes: CartElementSize[];
 }
 
 interface AddElementPayload {
-    productId: number;
+    productId: string;
     sizes: any[];
 }
 
@@ -41,7 +41,7 @@ export const cartSlice = createSlice({
             }
             state.cartElements.push(newCartItem);
         },
-        removeItem: (state, action: PayloadAction<{productId: number, sizeId:number}>) => {
+        removeItem: (state, action: PayloadAction<{productId: string, sizeId:number}>) => {
             const {productId, sizeId} = action.payload;
             const existingCartItem = state.cartElements.find((item) => item.productId === productId);
             //if existingCartItem sizes.lenght > 1 remove size, else remove item
@@ -53,7 +53,7 @@ export const cartSlice = createSlice({
             }
             state.cartElements = state.cartElements.filter((item) => item.productId !== productId);
         },
-        updateItem: (state, action: PayloadAction<{ productId: number; sizeId: number; qty: number }>) => {
+        updateItem: (state, action: PayloadAction<{ productId: string; sizeId: number; qty: number }>) => {
             const { productId, sizeId, qty } = action.payload;
             const cartItem = state.cartElements.find((item) => item.productId === productId);
             if (cartItem) {
